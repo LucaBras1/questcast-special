@@ -8,7 +8,7 @@ export function errorHandler(
   _request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  // Zod validation errors (name check handles cross-module instanceof failures in test environments)
+  // Zod validation errors
   if (error instanceof ZodError || error.name === 'ZodError') {
     const zodError = error as ZodError;
     const details = zodError.errors?.map((e) => ({
