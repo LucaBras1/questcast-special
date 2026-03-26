@@ -96,7 +96,8 @@ async function transcribe(audioBuffer: Buffer, language?: string): Promise<Trans
   const OpenAI = (await import('openai')).default;
   const openai = new OpenAI({ apiKey: 'test' });
 
-  const file = new File([audioBuffer], 'audio.webm', { type: 'audio/webm' });
+  // Cast through any to avoid react-native global Blob type conflict
+  const file = new (globalThis.Blob as any)([audioBuffer], { type: 'audio/webm' });
 
   const result = await openai.audio.transcriptions.create({
     model: 'whisper-1',
