@@ -1,0 +1,133 @@
+// Questcast MVP - PostgreSQL Schema
+// Provider: Supabase (PostgreSQL)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---- Users ----
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  displayName  String   @map("display_name")
+  language     Language @default(en)
+  contentRating ContentRating @default(teen) @map("content_rating")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  characters    Character[]
+  gameSessions  GameSession[]
+  preferences   UserPreferences?
+
+  @@map("users")
+}
+
+// ---- Characters ----
+
+model Character {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  name      String   @db.VarChar(50)
+  class     CharacterClass
+  level     Int      @default(1)
+  health    Int      @default(100)
+  maxHealth Int      @default(100) @map("max_health")
+  inventory Json     @default("[]")
+  gold      Int      @default(0)
+  abilities Json     @default("[]")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameSessions GameSession[]
+
+  @@index([userId])
+  @@map("characters")
+}
+
+// ---- Game Sessions ----
+
+model GameSession {
+  id          String        @id @default(uuid()) @db.Uuid
+  userId      String        @map("user_id") @db.Uuid
+  characterId String        @map("character_id") @db.Uuid
+  status      SessionStatus @default(active)
+  gameState   Json?         @map("game_state")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  character Character   @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  events    GameEvent[]
+
+  @@index([userId])
+  @@index([userId, status])
+  @@map("game_sessions")
+}
+
+// ---- Game Events (turn log) ----
+
+model GameEvent {
+  id                String   @id @default(uuid()) @db.Uuid
+  sessionId         String   @map("session_id") @db.Uuid
+  turnNumber        Int      @map("turn_number")
+  playerInput       String?  @map("player_input") @db.Text
+  aiResponse        String?  @map("ai_response") @db.Text
+  gameStateSnapshot Json?    @map("game_state_snapshot")
+  aiCost            Json?    @map("ai_cost")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  session GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([sessionId, turnNumber])
+  @@map("game_events")
+}
+
+// ---- User Preferences ----
+
+model UserPreferences {
+  id            String        @id @default(uuid()) @db.Uuid
+  userId        String        @unique @map("user_id") @db.Uuid
+  language      Language      @default(en)
+  contentRating ContentRating @default(teen) @map("content_rating")
+  narratorVoice String        @default("alloy") @map("narrator_voice") @db.VarChar(50)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+// ---- Enums ----
+
+enum Language {
+  cs
+  en
+}
+
+enum ContentRating {
+  family
+  teen
+  mature
+}
+
+enum CharacterClass {
+  warrior
+  mage
+  rogue
+  ranger
+}
+
+enum SessionStatus {
+  active
+  paused
+  completed
+}

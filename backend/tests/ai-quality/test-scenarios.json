@@ -1,0 +1,373 @@
+[
+  {
+    "id": "scenario-01",
+    "name": "Combat: Goblin Attack",
+    "description": "Player initiates combat with a goblin. AI should describe the combat scene and potentially request a dice roll.",
+    "language": "en",
+    "playerInput": "I draw my sword and attack the goblin!",
+    "gameState": {
+      "characterName": "Thorin",
+      "characterClass": "warrior",
+      "currentLocation": "Dark Cave",
+      "activeQuest": "Clear the Goblin Nest",
+      "turnsPlayed": 5
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": true,
+      "shouldMentionLocation": true,
+      "minWords": 40,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": true,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-02",
+    "name": "Exploration: Ancient Library",
+    "description": "Player explores a new area. AI should describe the environment and present opportunities.",
+    "language": "en",
+    "playerInput": "I look around the room and search for anything interesting.",
+    "gameState": {
+      "characterName": "Elara",
+      "characterClass": "mage",
+      "currentLocation": "Ancient Library",
+      "activeQuest": "Find the Lost Tome",
+      "turnsPlayed": 8
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-03",
+    "name": "NPC Dialogue: Tavern Keeper",
+    "description": "Player talks to an NPC. AI should generate dialogue and advance the story.",
+    "language": "en",
+    "playerInput": "I ask the tavern keeper about rumors of the dragon.",
+    "gameState": {
+      "characterName": "Shadow",
+      "characterClass": "rogue",
+      "currentLocation": "Misty Tavern",
+      "activeQuest": "Investigate Dragon Sightings",
+      "turnsPlayed": 2
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-04",
+    "name": "Dice Roll: Lockpicking",
+    "description": "Player attempts a skill check. AI should incorporate dice result into narration.",
+    "language": "en",
+    "playerInput": "I try to pick the lock on the treasure chest.",
+    "gameState": {
+      "characterName": "Shadow",
+      "characterClass": "rogue",
+      "currentLocation": "Dungeon Vault",
+      "activeQuest": "Steal the Royal Crown",
+      "turnsPlayed": 12
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": false,
+      "minWords": 40,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": true,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-05",
+    "name": "Session Start: New Adventure",
+    "description": "Very first turn of a new session. AI should set the scene dramatically.",
+    "language": "en",
+    "playerInput": "",
+    "gameState": {
+      "characterName": "Aria",
+      "characterClass": "ranger",
+      "currentLocation": "Elderwood Forest",
+      "activeQuest": "Beginning the Journey",
+      "turnsPlayed": 0
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": true,
+      "shouldMentionLocation": true,
+      "minWords": 60,
+      "maxWords": 180,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-06",
+    "name": "Session Resume: Continuing Adventure",
+    "description": "Player loads a saved session. AI should provide a recap and re-immerse.",
+    "language": "en",
+    "playerInput": "Continue my adventure.",
+    "gameState": {
+      "characterName": "Thorin",
+      "characterClass": "warrior",
+      "currentLocation": "Mountain Pass",
+      "activeQuest": "Reach the Dragon's Lair",
+      "turnsPlayed": 20
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": true,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-07",
+    "name": "Cliffhanger: Session Ending",
+    "description": "Near end of session (turn 28). AI should create a dramatic cliffhanger.",
+    "language": "en",
+    "playerInput": "I push open the final door.",
+    "gameState": {
+      "characterName": "Elara",
+      "characterClass": "mage",
+      "currentLocation": "Shadow Keep Throne Room",
+      "activeQuest": "Defeat the Shadow King",
+      "turnsPlayed": 28
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-08",
+    "name": "Czech Language: Combat",
+    "description": "Combat scenario in Czech. AI should respond entirely in Czech.",
+    "language": "cs",
+    "playerInput": "Tasim mec a utocim na goblina!",
+    "gameState": {
+      "characterName": "Borek",
+      "characterClass": "warrior",
+      "currentLocation": "Temna Jeskyne",
+      "activeQuest": "Vycistit Goblinovske Hnizdo",
+      "turnsPlayed": 5
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": true,
+      "shouldMentionLocation": false,
+      "minWords": 40,
+      "maxWords": 150,
+      "expectedLanguage": "cs",
+      "shouldRequireDice": true,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-09",
+    "name": "English Language: Peaceful Exploration",
+    "description": "Calm exploration in English. AI should describe scenery and atmosphere.",
+    "language": "en",
+    "playerInput": "I sit by the river and rest for a while.",
+    "gameState": {
+      "characterName": "Aria",
+      "characterClass": "ranger",
+      "currentLocation": "Crystal River Bank",
+      "activeQuest": "Deliver the Message",
+      "turnsPlayed": 10
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-10",
+    "name": "Edge Case: Nonsensical Player Input",
+    "description": "Player says something weird/off-topic. AI should redirect back to the game gracefully.",
+    "language": "en",
+    "playerInput": "I order a pizza with extra cheese and call my mom.",
+    "gameState": {
+      "characterName": "Thorin",
+      "characterClass": "warrior",
+      "currentLocation": "Dark Cave",
+      "activeQuest": "Clear the Goblin Nest",
+      "turnsPlayed": 7
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": false,
+      "minWords": 30,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true
+    }
+  },
+  {
+    "id": "scenario-11",
+    "name": "Image Trigger: Scene Transition",
+    "description": "Player enters a new dramatic location. AI should set shouldGenerateImage to true and provide an imagePrompt. Tests image trigger logic.",
+    "language": "en",
+    "playerInput": "I push through the heavy iron doors and step into the throne room.",
+    "gameState": {
+      "characterName": "Elara",
+      "characterClass": "mage",
+      "currentLocation": "Shadow Keep Entrance",
+      "activeQuest": "Confront the Shadow King",
+      "turnsPlayed": 18,
+      "imagesGenerated": 0
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true,
+      "shouldTriggerImage": true,
+      "shouldHaveImagePrompt": true
+    }
+  },
+  {
+    "id": "scenario-12",
+    "name": "Tutorial: Beat 1 First Encounter",
+    "description": "Very first beat of the tutorial. Player has just started. AI should deliver the tavern awakening scene with tutorialBeat 1 and prompt the player for their name.",
+    "language": "en",
+    "playerInput": "",
+    "gameState": {
+      "characterName": "",
+      "characterClass": "",
+      "currentLocation": "",
+      "activeQuest": "Tutorial",
+      "turnsPlayed": 0,
+      "isTutorial": true,
+      "tutorialBeat": 1
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": false,
+      "minWords": 40,
+      "maxWords": 120,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true,
+      "shouldHaveTutorialBeat": true,
+      "expectedTutorialBeat": 1
+    }
+  },
+  {
+    "id": "scenario-13",
+    "name": "Long Session: Turn 25+ Coherence with Summary",
+    "description": "Deep into a session at turn 27. Tests whether the AI maintains coherence using the narrative summary as long-term memory. The narrative summary references specific past events that the AI should stay consistent with.",
+    "language": "en",
+    "playerInput": "I return to the village elder to report what I found in the ruins.",
+    "gameState": {
+      "characterName": "Aria",
+      "characterClass": "ranger",
+      "currentLocation": "Thornwall Village",
+      "activeQuest": "Uncover the Source of the Blight",
+      "turnsPlayed": 27,
+      "questProgress": 0.65,
+      "narrativeSummary": "Aria arrived in Thornwall Village and learned from Elder Maren that crops were dying from an unknown blight. She tracked the corruption to the Whispering Ruins east of the village where she discovered a shattered ward stone leaking dark energy. She fought off corrupted wolves guarding the ruins and found an inscription suggesting the ward was deliberately broken by someone from the village. She collected a fragment of the ward stone as evidence.",
+      "npcs_met": ["Elder Maren", "Farmer Gregor", "The Herbalist"],
+      "inventory": ["Ward stone fragment", "Longbow", "Healing herbs", "Lantern"]
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true,
+      "shouldReferenceNarrativeSummary": true,
+      "expectedNPCReference": "Elder Maren"
+    }
+  },
+  {
+    "id": "scenario-14",
+    "name": "Multi-Turn Combat: Round 3",
+    "description": "Third round of an ongoing combat. Player is mid-fight with a troll. HP is getting low, creating tension. AI should maintain combat intensity and reference the ongoing battle.",
+    "language": "cs",
+    "playerInput": "Uhnu stranou a seknu ho mecem do boku!",
+    "gameState": {
+      "characterName": "Borek",
+      "characterClass": "warrior",
+      "currentLocation": "Most pres Cernou reku",
+      "activeQuest": "Prekrocit Cernou reku",
+      "turnsPlayed": 15,
+      "health": 12,
+      "maxHealth": 40,
+      "combatRound": 3,
+      "enemyType": "Kamenny troll",
+      "threatLevel": "high"
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": false,
+      "minWords": 40,
+      "maxWords": 120,
+      "expectedLanguage": "cs",
+      "shouldRequireDice": true,
+      "shouldBeNarrative": true,
+      "shouldReflectLowHP": true
+    }
+  },
+  {
+    "id": "scenario-15",
+    "name": "NPC Merchant Negotiation",
+    "description": "Player attempts to negotiate a price with a merchant NPC. AI should generate in-character merchant dialogue and handle the social interaction with appropriate game mechanics.",
+    "language": "en",
+    "playerInput": "That price is outrageous. I offer half. And I remind him that I saved his caravan from bandits last week.",
+    "gameState": {
+      "characterName": "Shadow",
+      "characterClass": "rogue",
+      "currentLocation": "Crossroads Market",
+      "activeQuest": "Acquire the Enchanted Lockpicks",
+      "turnsPlayed": 10,
+      "gold": 45,
+      "npcs_met": ["Merchant Halvir"],
+      "key_decisions": ["Saved Halvirs caravan from bandits"],
+      "inventory": ["Thieves tools", "Smoke bombs", "Hooded cloak"]
+    },
+    "expectedBehavior": {
+      "shouldMentionCharacter": false,
+      "shouldMentionLocation": true,
+      "minWords": 50,
+      "maxWords": 150,
+      "expectedLanguage": "en",
+      "shouldRequireDice": false,
+      "shouldBeNarrative": true,
+      "shouldReferenceNPC": true,
+      "shouldReferenceKeyDecision": true,
+      "expectedNPCReference": "Halvir"
+    }
+  }
+]

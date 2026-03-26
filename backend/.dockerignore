@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.env.*
+*.log
+coverage
+.nyc_output
+tests
+.eslintrc*
+eslint.config.*
+jest.config.*
+tsconfig.json
+README.md
+.git
+.gitignore
