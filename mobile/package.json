@@ -8,7 +8,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .ts,.tsx",
+    "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write 'app/**/*.{ts,tsx}' 'components/**/*.{ts,tsx}' 'hooks/**/*.{ts,tsx}' 'stores/**/*.{ts,tsx}' 'services/**/*.{ts,tsx}'",
     "type-check": "tsc --noEmit",
     "test": "jest"
@@ -39,7 +39,7 @@
     "@types/react": "~18.3.0",
     "@types/react-native": "~0.73.0",
     "typescript": "~5.6.0",
-    "eslint": "^9.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.0",

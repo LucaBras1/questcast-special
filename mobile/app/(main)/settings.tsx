@@ -79,6 +79,13 @@ function VolumeSlider({
     <View
       style={sliderStyles.container}
       onLayout={handleLayout}
+      accessibilityRole="adjustable"
+      accessibilityLabel={`Volume: ${Math.round(localValue * 100)} percent`}
+      accessibilityValue={{
+        min: 0,
+        max: 100,
+        now: Math.round(localValue * 100),
+      }}
       {...panResponder.panHandlers}
     >
       <View style={sliderStyles.track}>
@@ -597,6 +604,11 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: Colors.border,
     marginHorizontal: Spacing.lg,
+  },
+  chevron: {
+    fontSize: 24,
+    color: Colors.textMuted,
+    fontWeight: FontWeight.bold,
   },
   logoutSection: {
     paddingHorizontal: Spacing.xl,

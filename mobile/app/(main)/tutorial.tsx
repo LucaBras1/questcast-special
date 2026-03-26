@@ -373,7 +373,7 @@ export default function TutorialScreen() {
       </View>
 
       {/* Narration area */}
-      <View style={styles.narrationArea}>
+      <View style={styles.narrationArea} accessibilityRole="text" accessibilityLiveRegion="polite">
         <Animated.View
           style={[
             styles.narrationCard,

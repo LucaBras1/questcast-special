@@ -4,11 +4,13 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors, FontSize, FontWeight, Spacing, Shadow } from '../constants/theme';
 import { Button } from '../components/Button';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const { width } = Dimensions.get('window');
 
 export default function WelcomeScreen() {
   const router = useRouter();
+  const reduceMotion = useReducedMotion();
 
   // Animations
   const titleOpacity = useRef(new Animated.Value(0)).current;
@@ -20,6 +22,18 @@ export default function WelcomeScreen() {
   const orbFloat = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    if (reduceMotion) {
+      // Show everything immediately, no looping animations
+      titleOpacity.setValue(1);
+      titleTranslateY.setValue(0);
+      subtitleOpacity.setValue(1);
+      buttonOpacity.setValue(1);
+      buttonTranslateY.setValue(0);
+      glowPulse.setValue(0.5);
+      orbFloat.setValue(0);
+      return;
+    }
+
     // Entrance animations
     Animated.sequence([
       // Title fades in
@@ -93,7 +107,7 @@ export default function WelcomeScreen() {
         }),
       ]),
     ).start();
-  }, []);
+  }, [reduceMotion]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleGetStarted = () => {
     router.push('/(auth)/login');
