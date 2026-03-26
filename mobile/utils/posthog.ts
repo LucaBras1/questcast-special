@@ -64,7 +64,7 @@ export const PostHogEvents = {
  */
 export function trackEvent(
   event: string,
-  properties?: Record<string, unknown>,
+  properties?: Record<string, string | number | boolean | null>,
 ): void {
   posthogClient?.capture(event, properties);
 }
@@ -74,7 +74,7 @@ export function trackEvent(
  */
 export function identifyUser(
   userId: string,
-  traits?: Record<string, unknown>,
+  traits?: Record<string, string | number | boolean | null>,
 ): void {
   posthogClient?.identify(userId, traits);
 }

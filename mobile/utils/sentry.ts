@@ -33,9 +33,8 @@ export function initSentry(): void {
     sessionTrackingIntervalMillis: 30_000,
 
     integrations: [
-      Sentry.reactNativeTracingIntegration({
-        routingInstrumentation: Sentry.reactNavigationIntegration(),
-      }),
+      Sentry.reactNativeTracingIntegration(),
+      Sentry.reactNavigationIntegration(),
     ],
   });
 }
