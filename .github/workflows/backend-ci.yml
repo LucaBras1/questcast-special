@@ -1,0 +1,68 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "shared/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "shared/**"
+
+jobs:
+  backend-ci:
+    name: Lint, Typecheck, Test, Build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: questcast_test
+        options: >-
+          --health-cmd "pg_isready -U testuser -d questcast_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: cd backend && npm ci
+
+      - name: Generate Prisma client
+        run: cd backend && npx prisma generate
+
+      - name: Lint
+        run: cd backend && npm run lint
+
+      - name: Type check
+        run: cd backend && npx tsc --noEmit
+
+      - name: Run tests
+        env:
+          NODE_ENV: test
+          DATABASE_URL: postgresql://testuser:testpassword@localhost:5432/questcast_test
+          OPENAI_API_KEY: sk-test-fake-key-for-ci
+          JWT_SECRET: ci-test-jwt-secret-that-is-at-least-32-chars-long
+          REDIS_URL: ""
+        run: cd backend && npm run test
+
+      - name: Build
+        run: cd backend && npm run build

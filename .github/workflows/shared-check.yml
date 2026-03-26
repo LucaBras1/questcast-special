@@ -1,0 +1,48 @@
+name: Shared Types Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "shared/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "shared/**"
+
+jobs:
+  shared-typecheck:
+    name: TypeScript Compilation Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install TypeScript
+        run: npm install -g typescript
+
+      - name: Check shared types compile
+        run: |
+          cd shared
+          # Compile shared types and constants in check-only mode
+          tsc --noEmit --strict --esModuleInterop --skipLibCheck \
+              --moduleResolution node --target ES2022 --module ESNext \
+              types/index.ts constants/index.ts
+
+      - name: Verify exports
+        run: |
+          cd shared
+          # Ensure index files exist
+          for f in types/index.ts constants/index.ts; do
+            if [ ! -f "$f" ]; then
+              echo "ERROR: shared/$f not found"
+              exit 1
+            fi
+          done
+          echo "Shared types check: PASSED"
