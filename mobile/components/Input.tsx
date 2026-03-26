@@ -44,7 +44,7 @@ export function Input({
         {leftIcon && <View style={styles.iconLeft}>{leftIcon}</View>}
 
         <TextInput
-          style={[styles.input, leftIcon && styles.inputWithLeftIcon]}
+          style={[styles.input, leftIcon ? styles.inputWithLeftIcon : undefined]}
           placeholderTextColor={Colors.textMuted}
           selectionColor={Colors.gold}
           secureTextEntry={isPassword && !showPassword}

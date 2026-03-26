@@ -402,13 +402,13 @@ export default function GameSessionScreen() {
           Animated.timing(micGlow, {
             toValue: 0.7,
             duration: 1000,
-            easing: Easing.inOut(Easing.sine),
+            easing: Easing.inOut(Easing.sin),
             useNativeDriver: true,
           }),
           Animated.timing(micGlow, {
             toValue: 0.2,
             duration: 1000,
-            easing: Easing.inOut(Easing.sine),
+            easing: Easing.inOut(Easing.sin),
             useNativeDriver: true,
           }),
         ]),
