@@ -27,7 +27,9 @@ export type AnalyticsEventType =
   | 'combat_started'
   | 'combat_ended'
   | 'image_generated'
-  | 'error_occurred';
+  | 'error_occurred'
+  | 'tts_cache_hit'
+  | 'tts_cache_miss';
 
 export interface BaseEvent {
   event: AnalyticsEventType;
@@ -105,6 +107,21 @@ export interface ErrorOccurredEvent extends BaseEvent {
   };
 }
 
+export interface TTSCacheHitEvent extends BaseEvent {
+  event: 'tts_cache_hit';
+  data: {
+    textLength: number;
+  };
+}
+
+export interface TTSCacheMissEvent extends BaseEvent {
+  event: 'tts_cache_miss';
+  data: {
+    textLength: number;
+    cost: number;
+  };
+}
+
 export type AnalyticsEvent =
   | SessionStartEvent
   | SessionEndEvent
@@ -113,7 +130,9 @@ export type AnalyticsEvent =
   | CombatStartedEvent
   | CombatEndedEvent
   | ImageGeneratedEvent
-  | ErrorOccurredEvent;
+  | ErrorOccurredEvent
+  | TTSCacheHitEvent
+  | TTSCacheMissEvent;
 
 // ---- Analytics Service ----
 
