@@ -4,8 +4,9 @@ import type { Prisma } from '@prisma/client';
 import { NotFoundError, ForbiddenError, ValidationError } from '../utils/errors.js';
 import { logger } from '../utils/logger.js';
 import type { CreateSessionInput } from '../models/schemas.js';
-import type { GameState } from '../../../shared/types/index.js';
+import type { GameState, CharacterClass } from '../../../shared/types/index.js';
 import type { AICost } from '../ai/types.js';
+import { CLASS_STARTING_STATS } from './character-service.js';
 import {
   getSessionState,
   setSessionState,
@@ -25,19 +26,24 @@ import { assembleRecapPrompt, assembleSystemPrompt } from './prompt-service.js';
 /**
  * Default starting game state for a new session.
  */
-function createInitialGameState(sessionId: string, characterName: string): GameState {
+function createInitialGameState(
+  sessionId: string,
+  characterName: string,
+  characterClass: CharacterClass = 'warrior',
+): GameState {
+  const stats = CLASS_STARTING_STATS[characterClass];
   return {
     sessionId,
     character: {
       id: sessionId, // Will be overwritten
       name: characterName,
-      class: 'warrior',
+      class: characterClass,
       level: 1,
-      health: 100,
-      maxHealth: 100,
-      inventory: [],
-      gold: 0,
-      abilities: [],
+      health: stats.health,
+      maxHealth: stats.maxHealth,
+      inventory: [...stats.inventory],
+      gold: stats.gold,
+      abilities: [...stats.abilities],
     },
     story: {
       currentChapter: 1,
@@ -79,10 +85,9 @@ export async function createSession(userId: string, input: CreateSessionInput) {
     },
   });
 
-  // Create initial game state
-  const gameState = createInitialGameState(sessionId, input.characterName);
+  // Create initial game state with class-based starting stats
+  const gameState = createInitialGameState(sessionId, input.characterName, input.characterClass);
   gameState.character.id = characterId;
-  gameState.character.class = input.characterClass;
 
   // Create session in PostgreSQL
   const session = await prisma.gameSession.create({

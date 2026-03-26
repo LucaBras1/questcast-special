@@ -6,7 +6,7 @@
  */
 
 import { FastifyInstance } from 'fastify';
-import { buildTestApp, generateTestToken, generateExpiredToken } from '../setup';
+import { buildTestApp, generateTestToken } from '../setup';
 
 describe('authenticate middleware', () => {
   let app: FastifyInstance;
@@ -90,13 +90,14 @@ describe('authenticate middleware', () => {
   });
 
   it('should reject request with expired JWT', async () => {
-    const token = generateExpiredToken(app, {
-      sub: 'user-abc-123',
-      email: 'hero@questcast.app',
-    });
+    // Sign a token with 1 second expiry
+    const token = app.jwt.sign(
+      { sub: 'user-abc-123', email: 'hero@questcast.app' },
+      { expiresIn: '1s' },
+    );
 
     // Wait for token to expire
-    await new Promise((resolve) => setTimeout(resolve, 15));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const response = await app.inject({
       method: 'GET',

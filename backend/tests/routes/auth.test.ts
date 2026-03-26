@@ -12,7 +12,6 @@ import { FastifyInstance } from 'fastify';
 import {
   buildTestApp,
   generateTestToken,
-  generateExpiredToken,
   MockDatabase,
 } from '../setup';
 
@@ -549,11 +548,11 @@ describe('Auth Routes', () => {
     it('should reject expired refresh token', async () => {
       const expiredToken = app.jwt.sign(
         { sub: 'user-123', email: 'user@questcast.app', type: 'refresh' },
-        { expiresIn: '0s' },
+        { expiresIn: '1s' },
       );
 
-      // Wait a tick for expiry
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      // Wait for token to expire
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       const response = await app.inject({
         method: 'POST',
@@ -652,13 +651,13 @@ describe('Auth Routes', () => {
     });
 
     it('should reject request with expired JWT', async () => {
-      const token = generateExpiredToken(app, {
-        sub: 'user-abc-123',
-        email: 'protected@questcast.app',
-      });
+      const token = app.jwt.sign(
+        { sub: 'user-abc-123', email: 'protected@questcast.app' },
+        { expiresIn: '1s' },
+      );
 
       // Wait for token to expire
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       const response = await app.inject({
         method: 'GET',
