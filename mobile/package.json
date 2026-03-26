@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write 'app/**/*.{ts,tsx}' 'components/**/*.{ts,tsx}' 'hooks/**/*.{ts,tsx}' 'stores/**/*.{ts,tsx}' 'services/**/*.{ts,tsx}'",
     "type-check": "tsc --noEmit",
-    "test": "jest"
+    "test": "jest --testPathIgnorePatterns='e2e/'"
   },
   "dependencies": {
     "expo": "~52.0.0",
