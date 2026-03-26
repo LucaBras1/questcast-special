@@ -61,6 +61,65 @@ export async function userRoutes(app: FastifyInstance) {
   });
 
   /**
+   * POST /api/user/profile
+   * Sync user profile settings from mobile.
+   * Alias for PUT - mobile clients may prefer POST.
+   */
+  app.post(
+    '/profile',
+    {
+      preHandler: [validateBody(updateProfileSchema)],
+    },
+    async (request: FastifyRequest<{ Body: UpdateProfileInput }>, reply: FastifyReply) => {
+      const { displayName, language, contentRating } = request.body;
+
+      const updateData: Record<string, unknown> = {};
+      if (displayName !== undefined) updateData.displayName = displayName;
+      if (language !== undefined) updateData.language = language;
+      if (contentRating !== undefined) updateData.contentRating = contentRating;
+
+      if (Object.keys(updateData).length === 0) {
+        return reply.status(400).send({
+          code: 'VALIDATION_ERROR',
+          message: 'At least one field must be provided for update',
+        });
+      }
+
+      const user = await prisma.user.update({
+        where: { id: request.userId },
+        data: updateData,
+      });
+
+      if (language !== undefined || contentRating !== undefined) {
+        const prefsUpdate: Record<string, unknown> = {};
+        if (language !== undefined) prefsUpdate.language = language;
+        if (contentRating !== undefined) prefsUpdate.contentRating = contentRating;
+
+        await prisma.userPreferences.upsert({
+          where: { userId: request.userId },
+          update: prefsUpdate,
+          create: {
+            userId: request.userId,
+            language: language ?? 'en',
+            contentRating: contentRating ?? 'teen',
+          },
+        });
+      }
+
+      logger.info('User profile synced (POST)', { userId: request.userId, fields: Object.keys(updateData) });
+
+      return reply.send({
+        id: user.id,
+        email: user.email,
+        displayName: user.displayName,
+        language: user.language,
+        contentRating: user.contentRating,
+        updatedAt: user.updatedAt.toISOString(),
+      });
+    },
+  );
+
+  /**
    * PUT /api/user/profile
    * Update the authenticated user's display name, language, or content rating.
    */

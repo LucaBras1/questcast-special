@@ -8,7 +8,7 @@
  * - Batch events written to log
  */
 
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { existsSync, readFileSync, rmSync } from 'fs';
 import { join } from 'path';
 
 const LOGS_DIR = join(process.cwd(), 'logs');

@@ -346,6 +346,110 @@ export function trackError(
   });
 }
 
+// ---- Latency Percentile Tracker ----
+
+class LatencyTracker {
+  private samples: number[] = [];
+  private readonly maxSamples = 1000;
+
+  record(latencyMs: number): void {
+    this.samples.push(latencyMs);
+    if (this.samples.length > this.maxSamples) {
+      this.samples.shift();
+    }
+  }
+
+  getPercentile(p: number): number {
+    if (this.samples.length === 0) return 0;
+    const sorted = [...this.samples].sort((a, b) => a - b);
+    const index = Math.ceil((p / 100) * sorted.length) - 1;
+    return sorted[Math.max(0, index)];
+  }
+
+  getStats(): { p50: number; p95: number; p99: number; count: number; avg: number } {
+    const count = this.samples.length;
+    if (count === 0) return { p50: 0, p95: 0, p99: 0, count: 0, avg: 0 };
+    const avg = this.samples.reduce((a, b) => a + b, 0) / count;
+    return {
+      p50: this.getPercentile(50),
+      p95: this.getPercentile(95),
+      p99: this.getPercentile(99),
+      count,
+      avg: Math.round(avg),
+    };
+  }
+}
+
+// ---- TTS Cache Rate Tracker ----
+
+class CacheRateTracker {
+  private hits = 0;
+  private misses = 0;
+
+  recordHit(): void { this.hits++; }
+  recordMiss(): void { this.misses++; }
+
+  getStats(): { hits: number; misses: number; total: number; hitRate: number } {
+    const total = this.hits + this.misses;
+    return {
+      hits: this.hits,
+      misses: this.misses,
+      total,
+      hitRate: total > 0 ? Math.round((this.hits / total) * 100) / 100 : 0,
+    };
+  }
+}
+
+// Singleton trackers
+const voiceLatencyTracker = new LatencyTracker();
+const ttsCacheTracker = new CacheRateTracker();
+
+/**
+ * Record voice loop latency (full turn: STT -> LLM -> TTS).
+ */
+export function recordVoiceLatency(latencyMs: number): void {
+  voiceLatencyTracker.record(latencyMs);
+}
+
+/**
+ * Record a TTS cache hit.
+ */
+export function recordTTSCacheHit(textLength: number, sessionId?: string, userId?: string): void {
+  ttsCacheTracker.recordHit();
+  trackEvent({
+    event: 'tts_cache_hit',
+    userId,
+    sessionId,
+    data: { textLength },
+  });
+}
+
+/**
+ * Record a TTS cache miss.
+ */
+export function recordTTSCacheMiss(textLength: number, cost: number, sessionId?: string, userId?: string): void {
+  ttsCacheTracker.recordMiss();
+  trackEvent({
+    event: 'tts_cache_miss',
+    userId,
+    sessionId,
+    data: { textLength, cost },
+  });
+}
+
+/**
+ * Get current performance metrics snapshot.
+ */
+export function getPerformanceMetrics(): {
+  voiceLatency: { p50: number; p95: number; p99: number; count: number; avg: number };
+  ttsCache: { hits: number; misses: number; total: number; hitRate: number };
+} {
+  return {
+    voiceLatency: voiceLatencyTracker.getStats(),
+    ttsCache: ttsCacheTracker.getStats(),
+  };
+}
+
 /**
  * Start the PostHog flush timer. Call once at startup.
  */

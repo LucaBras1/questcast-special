@@ -25,7 +25,7 @@ import { logger } from '../utils/logger.js';
 import { circuitBreakers } from '../utils/circuit-breaker.js';
 import { CircuitBreakerOpenError } from '../utils/circuit-breaker.js';
 import { generateSceneImage, ImageLimitError } from '../services/image-service.js';
-import { trackTurnCompleted, trackError } from '../services/analytics.js';
+import { trackTurnCompleted, trackError, recordVoiceLatency } from '../services/analytics.js';
 import type { GameState } from '../../../shared/types/index.js';
 import { CONVERSATION_HISTORY_WINDOW, MAX_IMAGES_PER_SESSION } from '../../../shared/constants/index.js';
 
@@ -423,6 +423,7 @@ export async function turnRoutes(app: FastifyInstance) {
         });
 
         // Track analytics
+        recordVoiceLatency(finalCost.latencyMs);
         trackTurnCompleted(
           sessionId,
           request.userId,

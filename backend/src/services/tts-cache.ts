@@ -1,6 +1,7 @@
 import { getAIService } from '../ai/index.js';
 import { getCachedTTS, setCachedTTS } from './redis.js';
 import { logger } from '../utils/logger.js';
+import { recordTTSCacheHit, recordTTSCacheMiss } from './analytics.js';
 
 /**
  * TTS Caching Service.
@@ -33,6 +34,7 @@ export async function synthesizeWithCache(
   const cached = await getCachedTTS(text, voice);
   if (cached) {
     logger.debug('TTS cache hit', { textLength: text.length, voice });
+    recordTTSCacheHit(text.length);
     return {
       audioBase64: cached,
       format: 'opus',
@@ -47,6 +49,7 @@ export async function synthesizeWithCache(
   const result = await aiService.synthesizeSpeech(text, voice);
 
   const audioBase64 = result.audioBuffer.toString('base64');
+  recordTTSCacheMiss(text.length, result.cost.ttsCost);
 
   // Store in cache (fire and forget)
   setCachedTTS(text, voice, audioBase64).catch((err) => {

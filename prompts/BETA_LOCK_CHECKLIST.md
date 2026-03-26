@@ -1,7 +1,7 @@
 # Beta Lock Checklist -- Sprint 4 Final Review
 
-## Date: 2026-03-25
-## Status: Pre-lock review in progress
+## Date: 2026-03-26
+## Status: LOCKED FOR BETA
 ## Rule: After this checklist passes, ALL prompt files are FROZEN for beta. Changes require explicit approval.
 
 ---
@@ -161,6 +161,15 @@
 - [x] Negative prompt comprehensive (includes uncanny valley prevention)
 - [x] Variables documented (`{race}`, `{class}`, `{gender}`, `{features}`)
 
+### image_npc_portrait.txt (NEW -- Sprint 4)
+- [x] Visual identity section matches scene and character identity
+- [x] Five NPC type cues (merchant, guard, elder, tavern_keeper, quest_giver)
+- [x] Eight enemy type cues (goblin, orc, skeleton, bandit, dark_mage, wolf, troll, dragon)
+- [x] Four disposition modifiers (friendly, neutral, hostile, terrifying)
+- [x] Three DALL-E 3 example prompts (friendly NPC, hostile enemy, terrifying dragon)
+- [x] Negative prompt comprehensive (includes enemy-specific exclusions)
+- [x] Variables documented (`{npc_type}`, `{npc_race}`, `{npc_role}`, `{npc_features}`, `{disposition}`)
+
 ---
 
 ## Data Files
@@ -219,6 +228,20 @@
 - [x] Czech overall average: 7.8/10 (acceptable for beta)
 - [x] All scenarios pass structural validation
 - [x] All scenarios within token budget
+
+### Sprint 2 Deliverables (Added)
+- [x] Conversation summary mechanism documented (CONVERSATION_SUMMARY_MECHANISM.md)
+- [x] 10 sample test scenarios created (tests/sample_scenarios.json)
+- [x] Tutorial prompt refined with fight-path variants (tutorial.txt)
+- [x] tutorialBeat field added to narration_response.json schema
+- [x] Quality scoring rubric added to test_runner.md
+- [x] English few-shot examples added to system_prompt_base_en.txt
+
+### Sprint 4 Deliverables (Added)
+- [x] NPC/enemy portrait prompt template created (image_npc_portrait.txt)
+- [x] Czech diacritics fixed across all 4 Czech class openings
+- [x] Czech vocabulary typo fixed in system_prompt_base_cs.txt (zaburáceT)
+- [x] BETA_LOCK manifest with file hashes created (see below)
 
 ---
 
@@ -287,3 +310,120 @@ All post-lock changes require:
 1. Documented justification.
 2. Test suite pass before and after.
 3. Approval from AI/Prompt Engineer + QA Lead.
+
+---
+
+## Beta Lock File Manifest
+
+All prompt files frozen at beta lock. MD5 hashes for integrity verification.
+
+### Core System Prompts
+
+| File | Version | MD5 Hash |
+|---|---|---|
+| system_prompt_base_cs.txt | v1 | f7567385b5155446917fd20c7f0a6355 |
+| system_prompt_base_en.txt | v1 | fb8ec93ea4913b98ce84a51487a27104 |
+
+### Sub-Prompts
+
+| File | Version | MD5 Hash |
+|---|---|---|
+| scene_description.txt | v1 | 2a26228504b5d790b984e878c2a3f88d |
+| combat.txt | v1 | 75a929b3f9ad71eae55cdc3816316dfc |
+| dice_interpretation.txt | v1 | d89ef344ca22df038debfa1790efd207 |
+| cliffhanger.txt | v1 | 4f225263178899a893a7c7a2b144fd91 |
+| recap.txt | v1 | 1304f21f7d6e6807044675f7ba4955ac |
+| tutorial.txt | v1 | 9cd7e8034fa193b0250c145e886f7acc |
+| conversation_summary.txt | v1 | ab9a382e8c2febce31ba3bd6ec2e1111 |
+
+### Supporting Prompts
+
+| File | Version | MD5 Hash |
+|---|---|---|
+| content_safety_rules.txt | v1 | 62dd969bdce254e2cfa4b2706cbba0c9 |
+| adversarial_defense.txt | v1 | 6f25a3cc106f7c056fef339f85c0f2cf |
+| difficulty_modifiers.txt | v1 | 609133358017eff416b390726a9a14ae |
+| story_arcs.txt | v1 | b47d9086b4081432fed320e90b0ccccb |
+| npc_interaction.txt | v1 | 95999716cb3dde5440f655f79baebf4c |
+| death_save.txt | v1 | 3e571c6218779679a8bc4b7fd3835fb6 |
+| atmosphere.txt | v1 | 33ed4492b464471c3f634ffdadc43540 |
+
+### Image Prompts
+
+| File | Version | MD5 Hash |
+|---|---|---|
+| image_scene.txt | v1 | e66603738a2cdf401bfd23a7e076382b |
+| image_character.txt | v1 | 958e094c955b795ce2d8e644541bab7e |
+| image_npc_portrait.txt | v1 | 6900a4e19887cf8990aa45dbdd780e6c |
+
+### Data Files
+
+| File | Version | MD5 Hash |
+|---|---|---|
+| fallback_responses.json | v1 | 44998cb44b35d5c36d88b397791d834e |
+| game_state_schema.json | v1 | 43ab5f5178a5f422d46a79ad322fef7d |
+| output_schemas/narration_response.json | v1 | 5ce484dbfa00d64a10c50fda1e7b8354 |
+| output_schemas/dice_response.json | v1 | e623cff98fe4e927171e21bb69da9eaa |
+| output_schemas/summary_response.json | v1 | 494d92ed6b8b51fd7e599e210ff86c2b |
+
+### Class Openings
+
+| File | Version | MD5 Hash |
+|---|---|---|
+| class_openings/warrior_opening_cs.txt | v1 | 08d086b884ce912363f197a6f4fd981d |
+| class_openings/warrior_opening_en.txt | v1 | a7f75f6e4b21507c4c067e8e4ff0bd63 |
+| class_openings/mage_opening_cs.txt | v1 | 8f54a47ee6aea4b7f6b7927807e820c2 |
+| class_openings/mage_opening_en.txt | v1 | f8cdb0fe552b17c0bc60e1fe82ba1f6d |
+| class_openings/rogue_opening_cs.txt | v1 | ed8f2e77081f9619a10829da647a3b6d |
+| class_openings/rogue_opening_en.txt | v1 | 5e052599f00885763ca4f0ae68ddda21 |
+| class_openings/ranger_opening_cs.txt | v1 | 0ad95b66409b7208aa020e8f3aab324d |
+| class_openings/ranger_opening_en.txt | v1 | bbe0a436a5383325d40d41934a47d5ae |
+
+### Test Files (not locked, can evolve)
+
+| File | MD5 Hash |
+|---|---|
+| tests/expected_outputs.json | fb054ed13511f6da6149636c13b85e63 |
+| tests/sample_scenarios.json | c718f00505ae21db98459dc3d20683a7 |
+| tests/test_runner.md | b736966ca250b0360b6b96c4dd122434 |
+| quality_evaluation.txt | 0c2625b9be10870f38911a40a8978765 |
+
+### Verification Command
+
+```bash
+# Verify all hashes match the manifest
+cd prompts && md5sum -c <<'MANIFEST'
+f7567385b5155446917fd20c7f0a6355  system_prompt_base_cs.txt
+fb8ec93ea4913b98ce84a51487a27104  system_prompt_base_en.txt
+2a26228504b5d790b984e878c2a3f88d  scene_description.txt
+75a929b3f9ad71eae55cdc3816316dfc  combat.txt
+d89ef344ca22df038debfa1790efd207  dice_interpretation.txt
+4f225263178899a893a7c7a2b144fd91  cliffhanger.txt
+1304f21f7d6e6807044675f7ba4955ac  recap.txt
+9cd7e8034fa193b0250c145e886f7acc  tutorial.txt
+ab9a382e8c2febce31ba3bd6ec2e1111  conversation_summary.txt
+62dd969bdce254e2cfa4b2706cbba0c9  content_safety_rules.txt
+6f25a3cc106f7c056fef339f85c0f2cf  adversarial_defense.txt
+609133358017eff416b390726a9a14ae  difficulty_modifiers.txt
+b47d9086b4081432fed320e90b0ccccb  story_arcs.txt
+95999716cb3dde5440f655f79baebf4c  npc_interaction.txt
+3e571c6218779679a8bc4b7fd3835fb6  death_save.txt
+33ed4492b464471c3f634ffdadc43540  atmosphere.txt
+e66603738a2cdf401bfd23a7e076382b  image_scene.txt
+958e094c955b795ce2d8e644541bab7e  image_character.txt
+6900a4e19887cf8990aa45dbdd780e6c  image_npc_portrait.txt
+44998cb44b35d5c36d88b397791d834e  fallback_responses.json
+43ab5f5178a5f422d46a79ad322fef7d  game_state_schema.json
+5ce484dbfa00d64a10c50fda1e7b8354  output_schemas/narration_response.json
+e623cff98fe4e927171e21bb69da9eaa  output_schemas/dice_response.json
+494d92ed6b8b51fd7e599e210ff86c2b  output_schemas/summary_response.json
+08d086b884ce912363f197a6f4fd981d  class_openings/warrior_opening_cs.txt
+a7f75f6e4b21507c4c067e8e4ff0bd63  class_openings/warrior_opening_en.txt
+8f54a47ee6aea4b7f6b7927807e820c2  class_openings/mage_opening_cs.txt
+f8cdb0fe552b17c0bc60e1fe82ba1f6d  class_openings/mage_opening_en.txt
+ed8f2e77081f9619a10829da647a3b6d  class_openings/rogue_opening_cs.txt
+5e052599f00885763ca4f0ae68ddda21  class_openings/rogue_opening_en.txt
+0ad95b66409b7208aa020e8f3aab324d  class_openings/ranger_opening_cs.txt
+bbe0a436a5383325d40d41934a47d5ae  class_openings/ranger_opening_en.txt
+MANIFEST
+```

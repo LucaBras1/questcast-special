@@ -1,6 +1,8 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { prisma } from '../services/prisma.js';
 import { config } from '../utils/config.js';
+import { getPerformanceMetrics } from '../services/analytics.js';
+import { getDailyCostTotal } from '../services/cost-tracker.js';
 
 interface HealthResponse {
   status: 'ok' | 'degraded' | 'error';
@@ -105,5 +107,24 @@ export async function healthRoutes(app: FastifyInstance): Promise<void> {
     };
 
     return reply.status(statusCode).send(response);
+  });
+
+  // --- Performance metrics (internal use / monitoring dashboards) ---
+  app.get('/health/metrics', async (_request: FastifyRequest, _reply: FastifyReply) => {
+    const metrics = getPerformanceMetrics();
+    const dailyCost = getDailyCostTotal();
+
+    return {
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      voiceLatency: metrics.voiceLatency,
+      ttsCache: metrics.ttsCache,
+      dailyCost,
+      memory: {
+        rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
+        heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+      },
+    };
   });
 }

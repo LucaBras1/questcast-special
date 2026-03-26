@@ -47,6 +47,35 @@ export async function gameRoutes(app: FastifyInstance) {
   app.post(
     '/session',
     {
+      schema: {
+        tags: ['Game'],
+        summary: 'Create a new game session with a new character',
+        security: [{ bearerAuth: [] }],
+        body: {
+          type: 'object',
+          required: ['characterName', 'characterClass'],
+          properties: {
+            characterName: { type: 'string', minLength: 1, maxLength: 50 },
+            characterClass: { type: 'string', enum: ['warrior', 'mage', 'rogue', 'ranger'] },
+            language: { type: 'string', enum: ['cs', 'en'], default: 'en' },
+          },
+        },
+        response: {
+          201: {
+            type: 'object',
+            properties: {
+              id: { type: 'string', format: 'uuid' },
+              userId: { type: 'string' },
+              characterId: { type: 'string' },
+              status: { type: 'string' },
+              gameState: { type: 'object' },
+              character: { type: 'object' },
+              createdAt: { type: 'string' },
+              updatedAt: { type: 'string' },
+            },
+          },
+        },
+      },
       preHandler: [validateBody(createSessionSchema)],
     },
     async (request: FastifyRequest<{ Body: CreateSessionInput }>, reply: FastifyReply) => {
@@ -62,6 +91,15 @@ export async function gameRoutes(app: FastifyInstance) {
   app.get(
     '/session/:id',
     {
+      schema: {
+        tags: ['Game'],
+        summary: 'Get a game session by ID',
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: { id: { type: 'string', format: 'uuid' } },
+        },
+      },
       preHandler: [validateParams(sessionIdParamSchema)],
     },
     async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {
@@ -77,6 +115,21 @@ export async function gameRoutes(app: FastifyInstance) {
    */
   app.get(
     '/sessions',
+    {
+      schema: {
+        tags: ['Game'],
+        summary: 'List all sessions for the authenticated user',
+        security: [{ bearerAuth: [] }],
+        querystring: {
+          type: 'object',
+          properties: {
+            status: { type: 'string', enum: ['active', 'paused', 'completed'] },
+            limit: { type: 'number', minimum: 1, maximum: 100, default: 20 },
+            offset: { type: 'number', minimum: 0, default: 0 },
+          },
+        },
+      },
+    },
     async (request: FastifyRequest<{ Querystring: ListSessionsQuery }>, reply: FastifyReply) => {
       const query = listSessionsQuerySchema.parse(request.query);
       const result = await listSessions(request.userId, {
@@ -95,6 +148,22 @@ export async function gameRoutes(app: FastifyInstance) {
   app.patch(
     '/session/:id/status',
     {
+      schema: {
+        tags: ['Game'],
+        summary: 'Update session status (pause/resume/complete)',
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: { id: { type: 'string', format: 'uuid' } },
+        },
+        body: {
+          type: 'object',
+          required: ['status'],
+          properties: {
+            status: { type: 'string', enum: ['active', 'paused', 'completed'] },
+          },
+        },
+      },
       preHandler: [
         validateParams(sessionIdParamSchema),
         validateBody(updateSessionStatusSchema),
@@ -123,6 +192,15 @@ export async function gameRoutes(app: FastifyInstance) {
   app.post(
     '/session/:id/save',
     {
+      schema: {
+        tags: ['Game'],
+        summary: 'Manually save session state to database',
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: { id: { type: 'string', format: 'uuid' } },
+        },
+      },
       preHandler: [validateParams(sessionIdParamSchema)],
     },
     async (request: FastifyRequest<{ Params: { id: string } }>, reply: FastifyReply) => {

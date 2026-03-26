@@ -1,0 +1,65 @@
+Fantasy RPG NPC or enemy portrait for an AI voice adventure game.
+
+NPC type: {npc_type}
+Race: {npc_race}
+Role: {npc_role}
+Notable features: {npc_features}
+Disposition toward player: {disposition}
+
+<visual_identity>
+Questcast Visual Brand -- NPC and enemy portraits share the same visual language as player character portraits and scene images:
+Color palette: Warm golds and amber for skin highlights and friendly NPCs. Deep purples and indigo for shadows, mysterious characters, and enemies. Crimson or burnt orange for hostile enemies, blood effects, and danger cues. Sickly green or pale blue for undead, cursed, or supernatural entities.
+Style: Digital painting, semi-realistic with painterly brushwork. Not photorealistic, not cartoonish. Concept art quality. Rich textures on armor, fabric, and skin. Visible brushstrokes at edges, sharp focus on the face and shoulders.
+Mood: Each portrait reflects the NPC's nature and intent. Friendly NPCs feel warm and approachable. Neutral NPCs feel enigmatic. Hostile enemies feel menacing and dangerous. The portrait should feel like a character card in a tabletop RPG sourcebook.
+</visual_identity>
+
+<style_guide>
+Digital painting, heroic fantasy style matching Questcast visual identity. Portrait or bust composition showing head and shoulders. Background is a simple atmospheric wash that reflects the character's nature: warm amber for allies, cool purple for neutral, dark crimson for enemies, sickly green for undead. Keep focus entirely on the character. Dramatic lighting from one primary source. The character's expression and posture must communicate their personality at a glance.
+</style_guide>
+
+<npc_type_cues>
+merchant: Shrewd eyes, calculating smile, richly dressed but with practical details. Rings on fingers, coin purse visible, fine fabric with stains from handling goods. Warm lamplight as if in a shop.
+guard: Stern expression, disciplined posture, official armor or uniform with insignia. Weapon at the ready. Hard jaw, watchful eyes. Torchlight or daylight from a gate.
+elder: Deep wrinkles, wise knowing eyes, simple but dignified clothing. Staff or ancient tome. Long gray beard or braided silver hair. Soft candlelight or hearth glow.
+tavern_keeper: Broad face, hearty grin, rolled-up sleeves, apron stained with ale. Large hands, barrel chest. Warm golden firelight from behind.
+quest_giver: Mysterious cloak or regal bearing, one distinctive feature like a glowing pendant or scarred hand. Half in shadow, half lit. Suggests hidden knowledge.
+</npc_type_cues>
+
+<enemy_type_cues>
+goblin: Small, wiry, green or grey skin, sharp jagged teeth, beady yellow eyes, crude leather armor with scavenged metal pieces. Malicious grin. Lit from below by campfire giving sinister shadows.
+orc: Massive, muscular, tusked, scarred skin in grey-green tones. Heavy crude armor. Brutal weapon visible. Red-rimmed eyes full of aggression. Lit by torch or burning village behind.
+skeleton: Bone-white skull, empty eye sockets with faint blue or green glow, rusted armor fragments, tattered cloth remnants. Cold moonlight or dungeon torchlight.
+bandit: Human, rough and weathered, mismatched stolen armor, masked or hooded, visible blade. Scars and dirt. Calculating or desperate expression. Forest shadow lighting.
+dark_mage: Pale gaunt face, sunken eyes with arcane glow, dark robes with glowing runes, skeletal hands. Purple and black magical energy crackling. Eerie self-illuminated by magic.
+wolf: Large, lean predator, bared fangs, eyes reflecting torchlight in the dark. Thick matted fur. Hunched aggressive posture. Moonlit forest background.
+troll: Massive, hunched, thick warty skin, small angry eyes, enormous hands and club. Mossy or swamp-stained. Dim swamp light or cave darkness.
+dragon: Enormous scaled head filling the frame, ancient intelligent eyes, smoke trailing from nostrils. Scales catching firelight in golds or deep reds. Volcanic or cave glow illumination.
+</enemy_type_cues>
+
+<disposition_modifiers>
+friendly: Warm lighting, open expression, relaxed posture. Background leans amber and gold. Approachable feel.
+neutral: Balanced lighting, guarded or enigmatic expression. Background in muted purples. Neither inviting nor threatening.
+hostile: Harsh lighting from below or behind, aggressive expression or posture, narrowed eyes. Background in deep crimson or dark shadow. Menacing feel.
+terrifying: Extreme contrast lighting, monstrous features emphasized, oversized or looming composition. Background nearly black with accent color bleeding through. The viewer should feel small.
+</disposition_modifiers>
+
+<composition>
+NPC portraits use three-quarter profile, same as player character portraits. Enemy portraits may use a more direct, confrontational angle, facing the viewer. The expression is the most important element: it must instantly communicate whether this character is friend, foe, or unknown. One signature visual detail per character that makes them memorable: a scar, a glowing eye, a distinctive hat, a missing finger, an unusual weapon.
+</composition>
+
+<dalle3_format>
+When constructing the final prompt for the DALL-E 3 API, combine the NPC or enemy details into a single descriptive paragraph. Begin with the character description, then add type-specific visual cues, then add disposition modifiers, then add the Questcast visual identity keywords. Always append: "Digital painting, semi-realistic, dramatic single-source lighting, fantasy RPG character portrait, warm golds and deep purples color palette, painterly brushwork, no text, no watermarks, no realistic human faces, no modern elements."
+
+Example assembled prompt for a friendly merchant NPC:
+"A stout dwarven merchant with shrewd twinkling eyes and a calculating smile, three-quarter profile view. Richly dressed in a burgundy vest with gold buttons, coin purse hanging from a thick leather belt. Thick braided beard with gold rings woven through it. Warm lamplight from the left illuminates his ruddy face, casting soft shadows. Background is a warm amber atmospheric wash. Digital painting, semi-realistic, dramatic single-source lighting, fantasy RPG character portrait, warm golds and deep purples color palette, painterly brushwork, no text, no watermarks, no realistic human faces, no modern elements."
+
+Example assembled prompt for a hostile goblin enemy:
+"A snarling goblin warrior with jagged teeth and beady yellow eyes, facing the viewer with aggressive posture. Grey-green mottled skin covered in grime. Crude leather armor patched with scavenged metal plates. A notched rusty blade held at the ready. Lit from below by campfire casting sinister upward shadows across the face. Background is deep crimson fading to black. Digital painting, semi-realistic, dramatic single-source lighting, fantasy RPG enemy portrait, warm golds and deep purples color palette, painterly brushwork, no text, no watermarks, no realistic human faces, no modern elements."
+
+Example assembled prompt for a terrifying dragon:
+"An enormous ancient dragon head filling the frame, scales of deep crimson and black catching volcanic glow. Intelligent golden eyes with slit pupils stare directly at the viewer. Smoke trails from scarred nostrils. Massive curved horns frame the head. Faint orange light from below suggests a lava-filled cavern. Background is near-black with crimson bleeding through. Digital painting, semi-realistic, dramatic single-source lighting, fantasy RPG enemy portrait, warm golds and deep purples color palette, painterly brushwork, no text, no watermarks, no realistic human faces, no modern elements."
+</dalle3_format>
+
+<negative_prompt>
+Do not include: text, words, letters, numbers, watermarks, signatures, logos, modern clothing, modern elements, photographic style, blurry, low quality, deformed, extra limbs, extra fingers, weapons pointing at the viewer, anime style, cartoon style, chibi, pixel art, neon colors, oversaturated colors, flat lighting, stock photo aesthetic, hyper-realistic skin pores, uncanny valley expressions, cute or chibi enemies, comical expressions on hostile characters
+</negative_prompt>

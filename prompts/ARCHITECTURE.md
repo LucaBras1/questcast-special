@@ -104,7 +104,8 @@ Questcast uses a modular prompt system where a base system prompt is assembled f
 | `atmosphere.txt` | Atmospheric transition one-liners | Backend injects between turns |
 | `quality_evaluation.txt` | LLM-as-judge evaluation prompt | Test suite only, NOT production |
 | `image_scene.txt` | Image generation style guide for scenes | Backend passes to DALL-E 3 |
-| `image_character.txt` | Image generation style guide for characters | Backend passes to DALL-E 3 |
+| `image_character.txt` | Image generation style guide for player characters | Backend passes to DALL-E 3 |
+| `image_npc_portrait.txt` | Image generation style guide for NPC and enemy portraits | Backend passes to DALL-E 3 |
 
 ### Data Files
 

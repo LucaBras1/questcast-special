@@ -23,6 +23,8 @@ import {
 import { Button } from '../../components/Button';
 import { DiceRoller } from '../../components/DiceRoller';
 import { A11yLabels, A11yHints } from '../../utils/accessibility';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useAuthStore } from '../../stores/authStore';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const TUTORIAL_COMPLETED_KEY = 'questcast_tutorial_completed';
@@ -33,61 +35,89 @@ const TUTORIAL_COMPLETED_KEY = 'questcast_tutorial_completed';
 
 interface TutorialBeat {
   id: number;
-  title: string;
-  instruction: string;
-  narration: string;
-  teaches: string;
+  title: { en: string; cs: string };
+  instruction: { en: string; cs: string };
+  narration: { en: string; cs: string };
+  teaches: { en: string; cs: string };
   highlightElement: 'narrator' | 'mic' | 'choices' | 'dice' | 'continue';
-  choices?: string[];
+  choices?: { en: string[]; cs: string[] };
   requiresDiceRoll?: boolean;
 }
 
 const TUTORIAL_BEATS: TutorialBeat[] = [
   {
     id: 1,
-    title: 'Listen to the Story',
-    instruction: 'The AI Dungeon Master narrates your adventure. Listen carefully.',
-    narration:
-      'Your eyes snap open. The air is thick with smoke and old ale. You are sitting in the dark corner of a tavern you have never seen before. Across the table, a cloaked figure watches you. Candlelight catches their eyes. So, you are awake, a quiet voice says. Interesting. Tell me, what do they call you?',
-    teaches: 'listening',
+    title: { en: 'Listen to the Story', cs: 'Poslouchejte pribeh' },
+    instruction: {
+      en: 'The AI Dungeon Master narrates your adventure. Listen carefully.',
+      cs: 'AI Dungeon Master vypravuje vas pribeh. Pozorne poslouchejte.',
+    },
+    narration: {
+      en: 'Your eyes snap open. The air is thick with smoke and old ale. You are sitting in the dark corner of a tavern you have never seen before. Across the table, a cloaked figure watches you. Candlelight catches their eyes. So, you are awake, a quiet voice says. Interesting. Tell me, what do they call you?',
+      cs: 'Otvirate oci. Vzduch je tezky, prosyceny kourem a starym pivem. Sedite v temnem rohu hospody, kterou jste nikdy predtim nevideli. Naproti vam sedi postava zahalena v plasti. Jeji oci se lesknou ve svetle svicek. Tak vy jste se probudili, rika tichy hlas. Zajimave. Reknete mi, jak vam rikaji?',
+    },
+    teaches: { en: 'listening', cs: 'poslech' },
     highlightElement: 'narrator',
   },
   {
     id: 2,
-    title: 'Speak to Interact',
-    instruction: 'Tap the crystal orb and speak your name. The AI understands your voice.',
-    narration:
-      'The figure nods slowly. A good name, they say. Then their expression hardens. Listen carefully. Something is coming through those doors, and it is looking for you. A crash echoes from outside, followed by shouting. We can slip out the back into the darkness. Or we stay and face whatever comes.',
-    teaches: 'voice interaction',
+    title: { en: 'Speak to Interact', cs: 'Mluvte a ovladejte' },
+    instruction: {
+      en: 'Tap the crystal orb and speak your name. The AI understands your voice.',
+      cs: 'Klepnete na krystalovou kouli a reknete sve jmeno. AI rozumi vasemu hlasu.',
+    },
+    narration: {
+      en: 'The figure nods slowly. A good name, they say. Then their expression hardens. Listen carefully. Something is coming through those doors, and it is looking for you. A crash echoes from outside, followed by shouting. We can slip out the back into the darkness. Or we stay and face whatever comes.',
+      cs: 'Postava prikyvne. Dobre jmeno, rika. Pak zvazni. Poslouchejte. Za temi dvermi se blizi neco, co vas hleda. Zvenku se ozve krik a zvuk prevraceneho stolu. Muzeme proklouznout zadnimi dvermi do tmy. Nebo zustat a celit tomu celem.',
+    },
+    teaches: { en: 'voice interaction', cs: 'hlasove ovladani' },
     highlightElement: 'mic',
-    choices: ['Slip out the back', 'Stay and face it'],
+    choices: {
+      en: ['Slip out the back', 'Stay and face it'],
+      cs: ['Proklouznout zadnimi dvermi', 'Zustat a celit nebezpeci'],
+    },
   },
   {
     id: 3,
-    title: 'Make Your Choice',
-    instruction: 'Choose your path. Every decision shapes your story.',
-    narration:
-      'You bolt for the back door. Cold night air hits your face. A narrow alley stretches between stone walls, but an overturned cart blocks the way. The only path forward is over it. That will take some agility. Roll the dice!',
-    teaches: 'making decisions',
+    title: { en: 'Make Your Choice', cs: 'Ucinete rozhodnuti' },
+    instruction: {
+      en: 'Choose your path. Every decision shapes your story.',
+      cs: 'Zvolte svou cestu. Kazde rozhodnuti formuje vas pribeh.',
+    },
+    narration: {
+      en: 'You bolt for the back door. Cold night air hits your face. A narrow alley stretches between stone walls, but an overturned cart blocks the way. The only path forward is over it. That will take some agility. Roll the dice!',
+      cs: 'Vyrazite ke dverim. Studeny nocni vzduch vas ovanemrazivym dechem. Temna ulicka se vine mezi kamennymi zdmi. Ale cesta je zahrazena prevracenym vozem. Jediny zpusob dal vede pres nej. Bude to chtit obratnost. Hodte kostkou!',
+    },
+    teaches: { en: 'making decisions', cs: 'rozhodovani' },
     highlightElement: 'choices',
   },
   {
     id: 4,
-    title: 'Roll the Dice',
-    instruction: 'Tap to roll. The dice determine your fate in challenges.',
-    narration:
-      'You vault over the cart with surprising grace. On the wall beyond it, something catches your eye. A strange symbol carved into the stone, its lines faintly glowing. You have never seen anything like it, yet it feels oddly familiar.',
-    teaches: 'dice rolling',
+    title: { en: 'Roll the Dice', cs: 'Hodte kostkou' },
+    instruction: {
+      en: 'Tap to roll. The dice determine your fate in challenges.',
+      cs: 'Klepnete pro hod. Kostky urci vas osud ve vyzve.',
+    },
+    narration: {
+      en: 'You vault over the cart with surprising grace. On the wall beyond it, something catches your eye. A strange symbol carved into the stone, its lines faintly glowing. You have never seen anything like it, yet it feels oddly familiar.',
+      cs: 'Preskocite vuz s lehkosti, o ktere jste ani netusili. Za nim na zdi zahlednete podivny symbol vytesany do kamene. Zarive linie tvori obrazec, ktery jste jeste nikdy nevideli. Neco vam rika, ze tohle neni nahoda.',
+    },
+    teaches: { en: 'dice rolling', cs: 'hod kostkou' },
     highlightElement: 'dice',
     requiresDiceRoll: true,
   },
   {
     id: 5,
-    title: 'Your Adventure Continues',
-    instruction: 'Your progress saves automatically. Come back anytime to continue.',
-    narration:
-      'That symbol. You have seen it before, not in a place but in a feeling. Something ancient is stirring. The cloaked figure\'s voice comes one last time, now just a whisper on the wind. This was only the beginning. When you return, the world will be waiting.',
-    teaches: 'story continues',
+    title: { en: 'Your Adventure Continues', cs: 'Vase dobrodruzstvi pokracuje' },
+    instruction: {
+      en: 'Your progress saves automatically. Come back anytime to continue.',
+      cs: 'Vas postup se automaticky uklada. Vraitte se kdykoliv a pokracujte.',
+    },
+    narration: {
+      en: 'That symbol. You have seen it before, not in a place but in a feeling. Something ancient is stirring. The cloaked figure\'s voice comes one last time, now just a whisper on the wind. This was only the beginning. When you return, the world will be waiting.',
+      cs: 'Ten symbol. Videli jste ho uz nekde. A pak si vzpomenete, ne na konkretni misto, ale na pocit. Neco prastarého se probouzi. Hlas zahalene postavy se ozve naposledy, tentokrat jako sepy vetru. Tohle byl jen zacatek. Az se vratite, svet na vas bude cekat.',
+    },
+    teaches: { en: 'story continues', cs: 'pribeh pokracuje' },
     highlightElement: 'continue',
   },
 ];
@@ -119,6 +149,10 @@ export async function markTutorialCompleted(): Promise<void> {
 
 export default function TutorialScreen() {
   const router = useRouter();
+  const reduceMotion = useReducedMotion();
+  const language = useAuthStore((s) => s.user?.language) ?? 'en';
+  const lang = language === 'cs' ? 'cs' : 'en';
+
   const [currentBeat, setCurrentBeat] = useState(0);
   const [showInstruction, setShowInstruction] = useState(true);
   const [diceRolled, setDiceRolled] = useState(false);
@@ -138,14 +172,26 @@ export default function TutorialScreen() {
 
   // Animate beat entrance
   useEffect(() => {
-    narrationOpacity.setValue(0);
-    narrationTranslateY.setValue(20);
-    instructionOpacity.setValue(0);
-    instructionScale.setValue(0.9);
     setShowInstruction(true);
     setDiceRolled(false);
     setChoiceMade(false);
     setMicPulsing(beat.highlightElement === 'mic');
+
+    if (reduceMotion) {
+      // Skip animations, show everything immediately
+      narrationOpacity.setValue(1);
+      narrationTranslateY.setValue(0);
+      instructionOpacity.setValue(1);
+      instructionScale.setValue(1);
+      highlightPulse.setValue(1);
+      progressWidth.setValue((currentBeat + 1) / TUTORIAL_BEATS.length);
+      return;
+    }
+
+    narrationOpacity.setValue(0);
+    narrationTranslateY.setValue(20);
+    instructionOpacity.setValue(0);
+    instructionScale.setValue(0.9);
 
     // Progress bar animation
     Animated.timing(progressWidth, {
@@ -205,11 +251,11 @@ export default function TutorialScreen() {
         }),
       ]),
     ).start();
-  }, [currentBeat]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [currentBeat, reduceMotion]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Pulsing mic animation
   useEffect(() => {
-    if (micPulsing) {
+    if (micPulsing && !reduceMotion) {
       Animated.loop(
         Animated.sequence([
           Animated.timing(micPulseAnim, {
@@ -229,7 +275,7 @@ export default function TutorialScreen() {
     } else {
       micPulseAnim.setValue(1);
     }
-  }, [micPulsing, micPulseAnim]);
+  }, [micPulsing, micPulseAnim, reduceMotion]);
 
   const handleDismissInstruction = useCallback(() => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -312,7 +358,9 @@ export default function TutorialScreen() {
           accessibilityRole="button"
           accessibilityHint={A11yHints.tutorialSkip}
         >
-          <Text style={styles.skipText}>Skip Tutorial</Text>
+          <Text style={styles.skipText}>
+            {lang === 'cs' ? 'Preskocit' : 'Skip Tutorial'}
+          </Text>
         </TouchableOpacity>
       </View>
 

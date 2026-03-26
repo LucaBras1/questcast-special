@@ -1,8 +1,8 @@
-# Prompt Performance Report -- Sprint 4
+# Prompt Performance Report -- Sprint 1-4 Consolidated
 
-## Date: 2026-03-25
+## Date: 2026-03-26
 ## Model: GPT-4o-mini
-## Status: Pre-beta lock
+## Status: Beta locked
 
 ---
 
@@ -164,7 +164,43 @@ Key finding: Czech quality meets the 7/10 native speaker threshold established i
 
 ---
 
-## 8. Recommendations for Sprint 5 Optimization
+## 8. Sprint 1-4 Changes Summary
+
+### Sprint 1 (Assessment and Fixes)
+- Rated all 35 prompt files (overall 8.1/10; EN 8.4, CZ 7.8)
+- Fixed typos in mage_opening_cs.txt and rogue_opening_cs.txt
+- Added real-world knowledge redirect to content_safety_rules.txt
+- Added 3rd dice_roll_fallback entry in both languages
+- Updated recap.txt output format to full narration_response schema
+
+### Sprint 2 (Summary Mechanism and Testing)
+- Designed and documented conversation summary mechanism (every 10 turns)
+- Added 3 few-shot examples to system_prompt_base_en.txt (highest-impact quality fix)
+- Refined tutorial.txt with fight-path variants for Beats 3 and 4 in both languages
+- Added tutorialBeat field to narration_response.json schema
+- Created 10 sample test scenarios (tests/sample_scenarios.json)
+- Added quality scoring rubric to test_runner.md (weighted: Dramatic 20%, Coherence 25%, Language 20%, Agency 15%, TTS 20%)
+
+### Sprint 4 (Image Prompts, Docs, Czech Quality)
+- Created NPC/enemy portrait prompt template (image_npc_portrait.txt) with 5 NPC types, 8 enemy types, 4 disposition modifiers
+- Fixed Czech diacritics across all 4 Czech class openings (warrior, mage, rogue, ranger)
+- Fixed vocabulary typo in system_prompt_base_cs.txt (zaburáceT)
+- Created BETA_LOCK manifest with MD5 hashes for all 32 prompt files
+- Finalized all documentation (ARCHITECTURE.md, ASSEMBLY_GUIDE.md, VERSIONING.md, this report)
+
+### Image Generation Token Budget (New)
+
+NPC/enemy portrait generation adds no per-turn token cost since portrait prompts are assembled client-side from template + game state. DALL-E 3 cost is $0.040 per image, same as scene images.
+
+| Image Type | Template File | Avg Prompt Length | DALL-E 3 Cost |
+|---|---|---|---|
+| Scene | image_scene.txt | ~80 words | $0.040 |
+| Player character | image_character.txt | ~80 words | $0.040 |
+| NPC/enemy portrait | image_npc_portrait.txt | ~90 words | $0.040 |
+
+---
+
+## 9. Recommendations for Sprint 5 Optimization
 
 ### Cost Optimization
 1. **TTS phrase caching** -- Pre-generate the 50 most common phrases (greetings, dice prompts, transitions). Estimated saving: $0.025/session.
