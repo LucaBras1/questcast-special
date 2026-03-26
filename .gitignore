@@ -49,3 +49,15 @@ backend/prisma/*.db
 # Cache
 .cache/
 .turbo/
+
+# Windows metadata
+*:Zone.Identifier
+
+# Claude Code
+.claude/
+
+# Shared build artifacts (source is .ts only)
+shared/**/*.js
+shared/**/*.js.map
+shared/**/*.d.ts
+shared/**/*.d.ts.map
