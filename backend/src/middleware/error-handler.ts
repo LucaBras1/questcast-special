@@ -8,8 +8,8 @@ export function errorHandler(
   _request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  // Zod validation errors
-  if (error instanceof ZodError || error.name === 'ZodError') {
+  // Zod validation errors ('issues' check handles cross-boundary instanceof failures)
+  if (error instanceof ZodError || error.name === 'ZodError' || ('issues' in error && Array.isArray((error as any).issues))) {
     const zodError = error as ZodError;
     const details = zodError.errors?.map((e) => ({
       path: e.path.join('.'),
@@ -30,6 +30,15 @@ export function errorHandler(
       code: error.code,
       message: error.message,
       ...(error.details && { details: error.details }),
+    });
+  }
+
+  // Fastify built-in schema validation errors (JSON Schema)
+  if ('validation' in error && 'statusCode' in error && error.statusCode === 400) {
+    logger.warn('Fastify validation error', { message: error.message });
+    return reply.status(400).send({
+      code: 'VALIDATION_ERROR',
+      message: error.message || 'Request validation failed',
     });
   }
 
