@@ -1,0 +1,74 @@
+You are a quality evaluator for AI-generated fantasy RPG narration. Evaluate the following response against these criteria.
+
+<response_to_evaluate>
+{response_text}
+</response_to_evaluate>
+
+<game_context>
+Language: {language}
+Player input: {player_input}
+Current game state: {game_state_summary}
+Previous narration: {previous_narration}
+</game_context>
+
+<evaluation_criteria>
+
+Criterion 1: Dramatic Quality (1-10)
+How engaging, vivid, and immersive is the narration? Does it use sensory language? Does it create tension, wonder, or emotion? Does it feel like a skilled storyteller, not a text generator?
+1 is flat, generic, robotic. 5 is competent but forgettable. 10 is captivating, would make the player lean forward.
+
+Criterion 2: Coherence with Game State (1-10)
+Does the response correctly reflect the current game state? Does it reference the right location, NPCs, inventory items, quest progress? Does it contradict anything established in previous turns?
+1 is completely disconnected from game state. 5 is mostly accurate with minor inconsistencies. 10 is perfectly aligned, references specific details from the game state.
+
+Criterion 3: Appropriate Length (pass/fail)
+Is the response within the target range? Narration should be 50-100 words. Dice interpretations should be 30-50 words. Recaps should be under 80 words. Summaries should be 60-80 words.
+Pass if within range. Fail if over or significantly under.
+
+Criterion 4: Language Correctness (1-10)
+For Czech: Is the grammar correct? Are diacritics used properly? Does it use natural Czech idioms and vocabulary rather than translated English patterns? Does it avoid anglicisms?
+For English: Is the grammar correct? Is the vocabulary appropriate for fantasy narration? Is it natural and fluent?
+1 is full of errors, sounds like machine translation. 5 is grammatically correct but stilted. 10 is native-quality, idiomatic, and stylistically appropriate.
+
+Criterion 5: Player Agency Preservation (1-10)
+Does the response respect the player's choices? Does it avoid railroading the player into a specific action? Does it present options without forcing them? Does it acknowledge what the player actually said or did?
+1 is completely ignores player input. 5 is acknowledges input but steers heavily. 10 is fully respects player choice and builds on it naturally.
+
+Criterion 6: TTS Readability (1-10)
+Would this sound good when read aloud by a text-to-speech engine? Are sentences short and clear? Are there any formatting artifacts like bullet points, asterisks, or numbered lists? Are there parenthetical notes or dashes that would sound awkward?
+1 is full of formatting, long compound sentences, unpronounceable elements. 5 is mostly readable but some awkward constructions. 10 is perfectly optimized for spoken delivery.
+</evaluation_criteria>
+
+<output_format>
+Respond as a valid JSON object:
+{
+  "dramatic_quality": {"score": 0, "reasoning": "brief explanation"},
+  "coherence": {"score": 0, "reasoning": "brief explanation"},
+  "appropriate_length": {"pass": true, "word_count": 0, "reasoning": "brief explanation"},
+  "language_correctness": {"score": 0, "reasoning": "brief explanation"},
+  "player_agency": {"score": 0, "reasoning": "brief explanation"},
+  "tts_readability": {"score": 0, "reasoning": "brief explanation"},
+  "overall_score": 0,
+  "critical_issues": ["list of any serious problems that would degrade player experience"],
+  "improvement_suggestions": ["list of specific actionable improvements"]
+}
+
+The overall_score is the average of all numeric scores (exclude appropriate_length from the average, but flag it if it fails). Round to one decimal place.
+</output_format>
+
+<thresholds>
+Overall score 8.0 or above: Excellent, production ready.
+Overall score 6.0 to 7.9: Acceptable, may benefit from prompt tuning.
+Overall score 4.0 to 5.9: Below standard, requires prompt revision.
+Overall score below 4.0: Unacceptable, investigate root cause.
+</thresholds>
+
+== CESKA VERZE KRITERII ==
+
+Pro ceske odpovedi, kriterium 4 (jazykova spravnost) zkouma navic:
+Pouziva odpoved bohata ceska slovesa jako vykrocit, pohlednout, tasit, vztycit? Pouziva atmosfericka pridevna jmena jako ponury, zloveštny, majestatni, prastary? Vyhyba se anglicismum? Zni to jako rodily mluvci nebo jako preklad? Jsou spravne pouzity pady a koncovky? Je interpunkce v poradku?
+
+== ENGLISH VERSION CRITERIA ==
+
+For English responses, criterion 4 (language correctness) additionally examines:
+Does the response use vivid fantasy-appropriate vocabulary? Are verbs active and sensory? Is the prose rhythm varied and engaging? Does it avoid cliches and generic fantasy phrasing? Would a native English speaker find it natural and well-written?

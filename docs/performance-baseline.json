@@ -1,0 +1,127 @@
+{
+  "version": "0.1.0",
+  "sprint": 3,
+  "createdAt": "2026-03-25",
+  "description": "Performance baseline targets for Sprint 3 endpoints. Measured under single-user load with cold Redis cache unless noted.",
+  "environment": {
+    "runtime": "Node.js 20 LTS",
+    "framework": "Fastify 5.x",
+    "database": "PostgreSQL 16 (Neon serverless)",
+    "cache": "Upstash Redis",
+    "ai": "OpenAI GPT-4o-mini"
+  },
+  "endpoints": {
+    "POST /api/auth/register": {
+      "p50_ms": 150,
+      "p95_ms": 400,
+      "hard_fail_ms": 1000,
+      "notes": "Includes bcrypt hash (12 rounds) + DB insert"
+    },
+    "POST /api/auth/login": {
+      "p50_ms": 120,
+      "p95_ms": 350,
+      "hard_fail_ms": 800,
+      "notes": "Includes bcrypt compare + JWT sign"
+    },
+    "POST /api/game/session": {
+      "p50_ms": 200,
+      "p95_ms": 500,
+      "hard_fail_ms": 1000,
+      "notes": "Creates character + session + Redis cache write"
+    },
+    "GET /api/game/session/:id": {
+      "p50_ms": 50,
+      "p95_ms": 150,
+      "hard_fail_ms": 500,
+      "notes": "Single DB read with character include"
+    },
+    "GET /api/game/sessions": {
+      "p50_ms": 80,
+      "p95_ms": 200,
+      "hard_fail_ms": 600,
+      "notes": "Paginated list with count. Depends on total session count."
+    },
+    "POST /api/game/session/:id/turn": {
+      "p50_ms": 2000,
+      "p95_ms": 3000,
+      "hard_fail_ms": 5000,
+      "notes": "Full pipeline: STT (if audio) + moderation + LLM streaming + TTS + state update. Target from shared/constants. SSE response, time-to-first-byte should be < 1000ms."
+    },
+    "POST /api/game/session/:id/dice": {
+      "p50_ms": 1500,
+      "p95_ms": 2500,
+      "hard_fail_ms": 4000,
+      "notes": "Dice roll + LLM interpretation + TTS. Simpler than turn (no STT)."
+    },
+    "PATCH /api/game/session/:id/status": {
+      "p50_ms": 100,
+      "p95_ms": 300,
+      "hard_fail_ms": 800,
+      "notes": "Status transitions. Pause/complete includes DB save. Resume includes LLM recap generation (adds ~1500ms)."
+    },
+    "PATCH /api/game/session/:id/status (resume)": {
+      "p50_ms": 1800,
+      "p95_ms": 2800,
+      "hard_fail_ms": 5000,
+      "notes": "Resume specifically: loads state from DB, restores Redis cache, generates AI recap."
+    },
+    "POST /api/game/session/:id/save": {
+      "p50_ms": 150,
+      "p95_ms": 400,
+      "hard_fail_ms": 1000,
+      "notes": "Full state snapshot write to PostgreSQL + character sync"
+    },
+    "GET /health": {
+      "p50_ms": 5,
+      "p95_ms": 15,
+      "hard_fail_ms": 100,
+      "notes": "No DB or external calls"
+    }
+  },
+  "rateLimits": {
+    "POST /api/game/session/:id/turn": {
+      "max": 2,
+      "window": "10 seconds",
+      "keyBy": "sessionId",
+      "notes": "Prevents rapid-fire turn submissions"
+    },
+    "POST /api/game/session/:id/dice": {
+      "max": 5,
+      "window": "1 minute",
+      "keyBy": "sessionId",
+      "notes": "Dice rolls are faster but still limited"
+    },
+    "POST /api/auth/register": {
+      "max": 5,
+      "window": "1 minute",
+      "keyBy": "IP",
+      "notes": "Prevents registration spam"
+    },
+    "POST /api/auth/login": {
+      "max": 5,
+      "window": "1 minute",
+      "keyBy": "IP",
+      "notes": "Prevents brute-force login attempts"
+    },
+    "global": {
+      "max": 100,
+      "window": "1 minute",
+      "keyBy": "IP",
+      "notes": "Default Fastify rate limit for all routes"
+    }
+  },
+  "sessionLimits": {
+    "softTimeLimitMinutes": 45,
+    "hardTimeLimitMinutes": 60,
+    "maxTurnsPerSession": 60,
+    "autoSaveEveryNTurns": 5,
+    "conversationHistoryWindow": 15,
+    "maxImagesPerSession": 2
+  },
+  "costTargets": {
+    "turnCostCeiling_usd": 0.005,
+    "sessionCostCeiling_usd": 0.30,
+    "dailyCostAlertThreshold_usd": 10.00,
+    "notes": "Per-turn cost includes LLM + TTS. STT and image generation are additional."
+  }
+}

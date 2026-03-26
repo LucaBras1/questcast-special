@@ -1,0 +1,39 @@
+Fantasy RPG character portrait for an AI voice adventure game.
+
+Race: {race}
+Class: {class}
+Gender: {gender}
+Notable features: {features}
+
+<visual_identity>
+Questcast Visual Brand -- Character portraits share the same visual language as scene images:
+Color palette: Warm golds and amber for skin highlights and armor accents. Deep purples and indigo for shadows and background. Crimson or burnt orange for accent details like cloaks, gems, or magical effects.
+Style: Digital painting, semi-realistic with painterly brushwork. Not photorealistic, not cartoonish. Concept art quality. Rich textures on armor, fabric, and skin. Visible brushstrokes at edges, sharp focus on the face and shoulders.
+Mood: Heroic and dramatic. The character should feel like someone with a story. Dramatic single-source lighting, typically warm torchlight from one side creating deep shadows on the other. The portrait should feel like a painting hanging in a fantasy guild hall.
+</visual_identity>
+
+<style_guide>
+Digital painting, heroic fantasy style matching Questcast visual identity. Portrait or bust composition showing head and shoulders or waist-up. Background is a simple warm-to-dark gradient or abstract atmospheric wash in deep purple and gold tones. Keep focus entirely on the character. Dramatic lighting from one primary source such as torchlight, sunlight, or magical glow. Character should look capable, weathered, and interesting. Not generic, not pristine.
+</style_guide>
+
+<class_visual_cues>
+warrior: heavy armor with battle damage and dents, weapon visible such as sword or axe or hammer, strong grounded posture, scars or battle-worn details, warm metal tones catching torchlight
+mage: flowing robes or light arcane armor, glowing arcane symbols or runes, staff or ancient tome, mysterious aura with faint magical particles, purple and gold magical light
+rogue: dark leather armor, hood or cloak partially drawn, daggers or short blades visible, shadow-touched with half the face in darkness, alert and calculating expression
+ranger: natural earth tones and forest greens, bow slung over shoulder or dual weapons at hip, weathered traveling cloak, connection to nature through leaf motifs or animal companions hinted, keen and watchful eyes
+</class_visual_cues>
+
+<composition>
+Dramatic three-quarter profile is preferred over direct eye contact. Expression conveys personality: fierce determination for warriors, quiet wisdom for mages, calculating cunning for rogues, calm resolve for rangers. One signature detail that makes this character memorable such as a notable scar, a glowing eye, an unusual weapon, or a distinctive accessory. Lighting falls from the upper left in most cases, creating a warm highlight on one side and deep shadow on the other.
+</composition>
+
+<dalle3_format>
+When constructing the final prompt for the DALL-E 3 API, combine the character details into a single descriptive paragraph. Begin with the character description, then add class visual cues, then add the Questcast visual identity keywords. Always append: "Digital painting, semi-realistic, dramatic single-source lighting, fantasy RPG character portrait, warm golds and deep purples color palette, painterly brushwork, no text, no watermarks, no realistic human faces, no modern elements."
+
+Example assembled prompt for DALL-E 3:
+"A weathered human warrior in battle-damaged plate armor, three-quarter profile view, a long scar running across the left cheek. Strong jaw set with determination. A greatsword rests across the shoulders. Torchlight catches the dented metal from the upper left, casting deep shadows on the right side. Warm amber highlights on the armor edges. Background is a dark gradient of deep purple and gold. Digital painting, semi-realistic, dramatic single-source lighting, fantasy RPG character portrait, warm golds and deep purples color palette, painterly brushwork, no text, no watermarks, no realistic human faces, no modern elements."
+</dalle3_format>
+
+<negative_prompt>
+Do not include: text, words, letters, numbers, watermarks, signatures, logos, modern clothing, modern elements, photographic style, blurry, low quality, deformed, extra limbs, extra fingers, weapons pointing at the viewer, anime style, cartoon style, chibi, pixel art, neon colors, oversaturated colors, flat lighting, stock photo aesthetic, hyper-realistic skin pores, uncanny valley expressions
+</negative_prompt>

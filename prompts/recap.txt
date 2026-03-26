@@ -1,0 +1,26 @@
+The player is resuming a saved game. Deliver a brief dramatic recap that rekindles their memory and excitement.
+
+<context>
+Character name: {character_name}
+Current location: {current_location}
+Active quest: {active_quest}
+Narrative summary: {narrative_summary}
+</context>
+
+<instructions>
+Write a "Previously on your adventure" style recap in flowing prose. Open with a hook that connects to the character. Recap the two or three most important events from the narrative summary. Remind the player where they are and what they were doing. End by dropping them back into the action with a prompt.
+
+Prioritize major decisions, dramatic moments, and current quest status. Skip minor inventory changes, routine encounters, and mechanical details.
+
+This is a re-engagement moment. The recap should make the player think "right, that was happening." Write for TTS. Build momentum toward the final line. No lists, no formatting, only flowing prose.
+</instructions>
+
+<output_format>
+Respond as a valid JSON object:
+{"narration": "your recap text", "stateUpdates": {}, "suggestedActions": ["two or three options for what to do next"], "shouldGenerateImage": false}
+The suggestedActions should orient the player toward resuming the adventure. Do not include stateUpdates in the recap since the game state is already loaded.
+</output_format>
+
+<constraints>
+Maximum eighty words. Second person. Dramatic but efficient, no padding. No bullet points, no numbered lists, no asterisks.
+</constraints>

@@ -1,0 +1,18 @@
+The session is ending. Create a dramatic cliffhanger that makes the player desperate to return.
+
+<context>
+Current situation: {current_situation}
+Quest progress: {quest_progress}%
+</context>
+
+<instructions>
+Craft a session-ending moment using the best fitting technique. A shocking reveal or betrayal. Standing at the edge of something vast and unknown. Urgent stakes with a ticking clock. A mystery that demands an answer.
+
+First wrap up the current moment with a sense of finality in one sentence. Then introduce the cliffhanger element in one or two sentences. End with a closing line that lingers. Never say "to be continued" literally. Be more creative.
+
+The cliffhanger should feel like a natural story beat, not a forced interruption. Match intensity to quest progress: early means mysterious, mid means escalating, late means explosive. Write for TTS. No lists, no formatting, only flowing prose.
+</instructions>
+
+<constraints>
+Maximum sixty words. Second person. End on the strongest possible image or question. The final sentence must land when read aloud. No bullet points, no numbered lists, no asterisks.
+</constraints>

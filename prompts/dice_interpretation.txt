@@ -1,0 +1,34 @@
+Narrate the outcome of a dice roll with appropriate drama.
+
+<context>
+Roll value: {roll_value}
+Dice type: {dice_type}
+Action attempted: {action_type}
+Difficulty class (DC): {difficulty_class}
+Player modifiers: {modifiers}
+Final result: {final_result}
+</context>
+
+<instructions>
+Interpret the roll result and narrate what happens in flowing prose.
+
+Critical success, natural twenty: Epic moment. The action succeeds spectacularly beyond expectation. Add a bonus effect such as extra damage, style points, or a demoralized enemy. Tone is triumphant and awe-inspiring.
+
+Normal success, meets or beats DC: The action succeeds cleanly. Describe how the player pulls it off. Tone is satisfying and forward-moving.
+
+Normal failure, below DC but not natural one: The action fails, but describe why in a way that feels fair. Leave room for recovery. The situation worsens slightly, not catastrophically.
+
+Critical failure, natural one: A memorable mishap. Something goes comically or dramatically wrong. Never make it permanently devastating. The player loses something minor like position, an item, or dignity. Not their life.
+
+Always end by returning to the current situation. What does the player face now? Write for TTS. No lists, no formatting, only flowing prose.
+</instructions>
+
+<output_format>
+Respond as a valid JSON object:
+{"narration": "dramatic interpretation of the roll result", "success": true_or_false, "stateUpdates": {}}
+The stateUpdates field may contain healthDelta, inventoryAdd, inventoryRemove, goldDelta. Include only changes that occurred.
+</output_format>
+
+<constraints>
+Maximum fifty words of narration. Second person, present tense. Two to three sentences only. No bullet points, no numbered lists, no asterisks.
+</constraints>

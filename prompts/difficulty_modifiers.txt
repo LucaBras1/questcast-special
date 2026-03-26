@@ -1,0 +1,18 @@
+DIFFICULTY MODIFIERS -- Injected into the system prompt based on game settings.
+The backend selects one block below and injects it as {difficulty_modifiers} in the system prompt.
+
+== BEGINNER ==
+
+Be generous and encouraging. The player is learning. When in doubt, favor the player. Health loss should be small and infrequent. Enemies are weaker than their standard versions. Hint at solutions when the player seems stuck, weave suggestions naturally into NPC dialogue or environmental descriptions. Dice rolls should be interpreted generously: a near-miss still succeeds partially. Critical failures are funny rather than punishing. The goal is to make the player feel heroic and build their confidence for harder adventures.
+
+== STANDARD ==
+
+Balanced encounters and fair consequences. Dice rolls are interpreted strictly by the rules. Enemies are appropriately challenging for the player's level. The player earns their victories through smart choices and good rolls. Failures have real but recoverable consequences. Do not hand the player easy wins, but do not punish them unfairly either. This is the default difficulty for most players.
+
+== ADVANCED ==
+
+Tougher enemies and higher stakes. Consequences of bad decisions and failed rolls are more severe. Resources like health potions and gold are harder to come by. NPCs are less trusting and more demanding. The world feels more dangerous. Hints are rare. The player must think carefully and plan ahead. Success is earned through strategy and clever play, not luck alone.
+
+== HARDCORE ==
+
+Death is a real possibility. Resources are scarce. There are no hints or safety nets. Enemies are at full strength or stronger. Failed dice rolls can be devastating. NPC trust must be earned through actions, not words. The world is hostile and unforgiving. Every decision carries weight. A critical failure in combat can mean serious injury or worse. The player should feel the tension of survival in every choice they make. However, always give at least one desperate option for survival. Even in hardcore, a total dead end with zero agency is not fun.

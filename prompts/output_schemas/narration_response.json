@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NarrationResponse",
+  "description": "Standard turn response from the LLM. Used for Zod validation on the backend and can be passed to OpenAI structured outputs.",
+  "type": "object",
+  "required": ["narration", "stateUpdates", "suggestedActions", "shouldGenerateImage"],
+  "additionalProperties": false,
+  "properties": {
+    "narration": {
+      "type": "string",
+      "description": "The story text narrated to the player. Flowing prose, 50-100 words, optimized for TTS. No bullet points, no lists, no markdown formatting.",
+      "minLength": 20,
+      "maxLength": 800
+    },
+    "stateUpdates": {
+      "type": "object",
+      "description": "Game state changes resulting from this turn. Only include fields that changed. Omit fields with no change.",
+      "additionalProperties": false,
+      "properties": {
+        "healthDelta": {
+          "type": "number",
+          "description": "Change in HP. Negative for damage (e.g. -5), positive for healing (e.g. 3). Omit if no change."
+        },
+        "inventoryAdd": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Items added to the player's inventory this turn. Omit if none."
+        },
+        "inventoryRemove": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Items removed from the player's inventory this turn. Must match existing item names exactly. Omit if none."
+        },
+        "goldDelta": {
+          "type": "number",
+          "description": "Change in gold. Positive for gain, negative for spending. Omit if no change."
+        },
+        "locationChange": {
+          "type": "string",
+          "description": "New location name if the player moved. Use short descriptive names (e.g. 'Dark Forest', 'Village Square'). Omit if no movement."
+        },
+        "questProgress": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "New quest progress value (0.0 to 1.0). Only set when meaningful progress occurs. Omit otherwise."
+        },
+        "timeOfDay": {
+          "type": "string",
+          "enum": ["morning", "afternoon", "evening", "night"],
+          "description": "New time of day if it changed. Omit if unchanged."
+        },
+        "threatLevel": {
+          "type": "string",
+          "enum": ["low", "moderate", "high", "critical"],
+          "description": "New threat level if the situation changed. Omit if unchanged."
+        }
+      }
+    },
+    "suggestedActions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 2,
+      "maxItems": 3,
+      "description": "Two to three short suggested next actions for UI hints. Each should be a brief phrase the player could say, e.g. 'Explore the cave', 'Talk to the stranger', 'Draw your sword'."
+    },
+    "shouldGenerateImage": {
+      "type": "boolean",
+      "description": "True when the moment is visually significant: arriving at a new location, a dramatic reveal, a major battle beginning. Budget is 2 images per session."
+    },
+    "imagePrompt": {
+      "type": "string",
+      "description": "English-language scene description for the image generator. Required when shouldGenerateImage is true. Should describe the visual scene in detail suitable for DALL-E. Omit when shouldGenerateImage is false."
+    },
+    "tutorialBeat": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Current tutorial beat number (1 through 5). Only present when the session is a tutorial. Omit for normal game sessions. The backend uses this to track tutorial progress and trigger the next beat."
+    }
+  }
+}

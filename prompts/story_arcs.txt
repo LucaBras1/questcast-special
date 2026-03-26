@@ -1,0 +1,84 @@
+STORY ARC TEMPLATES -- Used by the AI to structure multi-session narratives.
+The backend selects an arc at game creation and injects it into the system prompt context.
+The AI uses quest_progress (0.0 to 1.0) to pace revelations and escalate stakes.
+
+== ARC 1: THE QUEST (Find or Retrieve an Artifact) ==
+
+<arc_structure>
+Type: quest
+Acts: 5
+Description: The classic retrieval adventure. A powerful artifact has been lost, stolen, or hidden. The player must find it before someone else does -- or before the consequences of its absence destroy the realm.
+
+Opening Hook (quest_progress 0.0):
+A desperate NPC reveals that a legendary artifact is missing. Without it, a creeping doom threatens the land. The player is the only one who can find it. Establish the artifact's importance through a tangible detail: crops are dying, magic is failing, a barrier is weakening.
+
+Rising Action Beat 1 (quest_progress 0.1 - 0.25):
+The player discovers the first clue to the artifact's location. A map fragment, a dying witness, or a cryptic inscription. Introduce a rival or antagonist who also seeks the artifact. End with a clear direction for the next leg of the journey.
+
+Rising Action Beat 2 (quest_progress 0.25 - 0.50):
+The trail leads through a dangerous region. The player faces environmental hazards and hostile creatures. Introduce a temporary ally or an NPC who has information but demands a price. Reveal that the artifact is more powerful or dangerous than anyone knew.
+
+Rising Action Beat 3 (quest_progress 0.50 - 0.75):
+The player reaches the artifact's resting place but it is guarded or trapped. A moral choice appears: the artifact could be used for personal gain, or there is a cost to claiming it. The antagonist arrives or is revealed to be closer than expected.
+
+Climax Trigger (quest_progress 0.75 - 0.90):
+The final confrontation. The player must face the guardian, the antagonist, or both. The artifact's true nature is fully revealed. The stakes are at their highest: failure means the doom the opening hook described becomes irreversible.
+
+Resolution (quest_progress 0.90 - 1.0):
+The player returns the artifact or uses it. The world responds. NPCs react to the outcome. Loose ends are tied. Hint at a future adventure born from the consequences of this one.
+</arc_structure>
+
+== ARC 2: THE RESCUE (Save Someone from Escalating Danger) ==
+
+<arc_structure>
+Type: rescue
+Acts: 4
+Description: Someone important has been captured, cursed, or trapped. Time pressure increases with every turn. The player must act fast and make difficult choices about who to trust and which path to take.
+
+Opening Hook (quest_progress 0.0):
+A frantic NPC arrives with terrible news. Someone beloved or important has been taken. Establish urgency: the captive will be moved, sacrificed, or lost forever within a certain time. Give the player an immediate lead to follow.
+
+Rising Action Beat 1 (quest_progress 0.1 - 0.30):
+The player follows the trail and encounters obstacles. Each obstacle costs time. Introduce a choice between a fast but dangerous path and a slower but safer one. An NPC offers help but with a suspicious motive. Drop hints about who is behind the kidnapping and why.
+
+Rising Action Beat 2 (quest_progress 0.30 - 0.55):
+The player discovers the captor's stronghold or lair. It is more heavily guarded than expected. The player must choose between stealth, diplomacy, or direct assault. Reveal a complication: the captive is injured, cursed, or does not want to leave for a surprising reason.
+
+Rising Action Beat 3 (quest_progress 0.55 - 0.75):
+The escape attempt begins. Things go wrong. An alarm sounds, a trap springs, or a betrayal is revealed. The player must adapt on the fly. The captor confronts the player directly. The captive's condition worsens.
+
+Climax Trigger (quest_progress 0.75 - 0.90):
+A desperate final stand. The player must protect the captive while dealing with the captor and their forces. A sacrifice or gamble is required. The situation seems hopeless for one tense moment before the player's choices determine the outcome.
+
+Resolution (quest_progress 0.90 - 1.0):
+The captive is saved or the player deals with the consequences of failure. The captor's fate is decided. The rescued NPC shares information that opens a new thread. The world acknowledges the player's bravery or mourns what was lost.
+</arc_structure>
+
+== ARC 3: THE MYSTERY (Investigate a Strange Occurrence) ==
+
+<arc_structure>
+Type: mystery
+Acts: 5
+Description: Something inexplicable has happened. A death, a disappearance, a curse, a phenomenon. The player must gather clues, question NPCs, and piece together the truth. Every clue eliminates one possibility and opens another.
+
+Opening Hook (quest_progress 0.0):
+The player stumbles upon or is called to investigate something wrong. A body in the square, a village where everyone has forgotten their names, a forest that has turned to stone overnight. The initial scene contains three details: one is a genuine clue, one is a red herring, one is atmosphere.
+
+Rising Action Beat 1 (quest_progress 0.1 - 0.25):
+First round of investigation. The player can examine the scene, question witnesses, or consult local experts. Each avenue yields one clue and one contradiction. Introduce two suspects or theories. One of them is wrong.
+
+Rising Action Beat 2 (quest_progress 0.25 - 0.50):
+The investigation takes the player to a new location connected to the mystery. A pattern emerges. A second incident occurs that mirrors the first but with a key difference. The player is warned to stop investigating by someone who may be protecting them or threatening them.
+
+Rising Action Beat 3 (quest_progress 0.50 - 0.70):
+The truth starts to crystallize. The player eliminates the wrong theory and focuses on the right one. But the real culprit or cause is more complex than expected. A victim is connected to the culprit. The player faces a moral gray area: the culprit may have had understandable motives.
+
+Rising Action Beat 4 (quest_progress 0.70 - 0.85):
+The final pieces fall into place. The player knows the truth but must prove it or confront it. The culprit becomes aware that the player knows. Danger escalates. A trap is set, either by the player or for them.
+
+Climax Trigger (quest_progress 0.85 - 0.95):
+The confrontation. The player presents evidence or faces the source of the mystery directly. Choices matter: justice or mercy, exposure or silence, destruction or containment. The mystery's resolution has consequences beyond the immediate case.
+
+Resolution (quest_progress 0.95 - 1.0):
+The truth is revealed to all involved. The community reacts. The player's choices during the investigation shaped the outcome. A lingering question remains as a hook for future adventures.
+</arc_structure>

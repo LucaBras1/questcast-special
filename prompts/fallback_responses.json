@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "description": "Pre-written fallback responses for when AI APIs are unavailable. All responses stay in-character to maintain immersion.",
+
+  "cs": {
+    "generic_continue": [
+      "Svet kolem vas na okamzik zavahal, jako by sama realita zadrzela dech. Pak se vsechno vrati do normalu. Co chcete delat dal?",
+      "Podivny stun proletl krajinou, ale rychle odeznel. Vase dobrodruzstvi pokracuje. Jak se rozhodnete?",
+      "Vzduch se zachvel neviditelnou energii. Cokoliv to bylo, pominulo to. Jste pripraveni pokracovat?"
+    ],
+    "combat_continue": [
+      "Bitva pokracuje! Vas nepritel pred vami stoji ve strehu. Je rada na vas -- jak zautocite?",
+      "Prach boje se jeste neusadil. Vas protivnik se pripravuje na dalsi utok. Co udelate?",
+      "Zvuk oceli jeste zni vzduchem. Nepritel cerpa silu. Jak odpovidite?"
+    ],
+    "exploration_continue": [
+      "Cesta pred vami se vine dal do neznama. Kazdy krok vas priblizuje k odpovedi. Kam pujdete?",
+      "Krajina kolem vas skryva jeste mnoho tajemstvi. Co vas laka prozkoumat?",
+      "Stojite na rozcesti moznosti. Vzduch je plny prislibu dobrodruzstvi. Ktery smer zvolite?"
+    ],
+    "error_acknowledgment": [
+      "Magicke energie kolem vas na okamzik zakolisaly. Svet se stabilizuje. Pokracujme v pribehu.",
+      "Tajemna sila na chvili zatemnila vase smysly, ale vsechno je zase v poradku.",
+      "Realita se na okamzik zamlzila jako ranni opar. Teraz je ale vse jasne. Co budete delat?"
+    ],
+    "session_save": [
+      "Vase dobrodruzstvi bylo zaznamenano v kronikach. Az budete pripraveni, pribeh bude cekat.",
+      "Hra ulozena. Osud je trpelivy -- vrati se pro vas, az prijde cas.",
+      "Kroniky si zapamatovaly vase ciny. Dobrodruzstvi na vas bude cekat."
+    ],
+    "dice_roll_fallback": [
+      "Kostky osudu se otoci... Vysledek je nejasny, ale pribeh pokracuje. Co delate dal?",
+      "Sily osudu na chvili zakolisaly. Akce probiha s neurcitym vysledkem. Pokracujte.",
+      "Kostka se zakuti ve vzduchu a pristane na hrane. Osud vaha. Nakonec se prikloní na vasi stranu. Pokracujte v akci."
+    ],
+    "session_timeout": [
+      "Unaveni padne na vase vicky. Je cas odpocivat, dobrodruzne. Vas pribeh bude cekat na vase navrat.",
+      "Nocni tma vas obklopi jako deka. Je cas ulozit se. Dobrodruzstvi pokracuje priste."
+    ]
+  },
+
+  "en": {
+    "generic_continue": [
+      "The world around you flickers for a moment, as if reality itself held its breath. Then everything settles. What do you do next?",
+      "A strange hum passes through the air, then fades. Your adventure continues. What's your move?",
+      "The air shimmers with unseen energy. Whatever it was, it's passed. Ready to continue?"
+    ],
+    "combat_continue": [
+      "The battle rages on! Your enemy stands ready before you. It's your move -- how do you strike?",
+      "The dust of combat hasn't settled yet. Your foe prepares for another attack. What do you do?",
+      "Steel still rings in the air. Your enemy gathers strength. How do you respond?"
+    ],
+    "exploration_continue": [
+      "The path ahead winds deeper into the unknown. Every step brings you closer to answers. Where do you go?",
+      "The landscape around you still holds many secrets. What catches your eye?",
+      "You stand at a crossroads of possibility. The air hums with the promise of adventure. Which way?"
+    ],
+    "error_acknowledgment": [
+      "The magical energies around you waver for a moment. The world stabilizes. Let us continue.",
+      "A mysterious force clouds your senses briefly, but all is well again.",
+      "Reality blurs like morning mist for just a moment. Everything is clear now. What will you do?"
+    ],
+    "session_save": [
+      "Your adventure has been recorded in the chronicles. When you're ready, the story will be waiting.",
+      "Game saved. Fate is patient -- it will return for you when the time comes.",
+      "The chronicles remember your deeds. Your adventure awaits your return."
+    ],
+    "dice_roll_fallback": [
+      "The dice of fate tumble... The result is unclear, but the story presses on. What do you do?",
+      "The forces of destiny waver briefly. Your action proceeds with an uncertain outcome. Continue.",
+      "The die spins in the air and lands on its edge. Fate hesitates. Then it tips in your favor. Carry on."
+    ],
+    "session_timeout": [
+      "Weariness falls upon your eyelids. It is time to rest, adventurer. Your story will await your return.",
+      "Night's darkness wraps around you like a blanket. Time to rest. The adventure continues next time."
+    ]
+  },
+
+  "selection_strategy": "Random selection within each category. Never repeat the same response twice in a row. Track last_used index per category."
+}

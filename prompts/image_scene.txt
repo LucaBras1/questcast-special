@@ -1,0 +1,49 @@
+Fantasy RPG scene illustration for an AI voice adventure game.
+
+Scene: {scene_description}
+Mood: {mood}
+Art style: {art_style}
+
+<visual_identity>
+Questcast Visual Brand -- All generated images must share this consistent look:
+Color palette: Warm golds, amber, and ochre for safety and hope. Deep purples, indigo, and midnight blue for mystery and danger. Crimson and burnt orange for conflict and urgency. All scenes carry a torch-lit warmth even in darkness.
+Style: Digital painting, semi-realistic with painterly brushwork. Not photorealistic, not cartoonish. Think concept art for a AAA fantasy game. Rich textures, visible brushstrokes at edges, sharp focus on the focal point with softer atmospheric backgrounds.
+Mood: Epic fantasy with gravitas. Every image should feel like a frame from a cinematic adventure. Dramatic lighting with strong directional light sources such as torches, moonlight, magical glow, or dawn breaking through clouds. Deep shadows with warm edge light.
+Scale: Environments feel vast and ancient. Structures are weathered. Nature is wild and untamed. The player character is never depicted directly to preserve player imagination.
+</visual_identity>
+
+<style_guide>
+epic_fantasy: Bold warm golds and deep purples, dramatic directional lighting, sweeping vistas, golden hour glow, detailed environment, heroic scale, torch-lit warmth
+dark_atmospheric: Deep shadows with amber highlights, muted palette with purple or crimson accent, fog or mist, moonlight mixed with distant torchlight, sense of isolation, indigo sky
+storybook: Warm amber and gold tones, soft edges, painterly texture, slightly stylized proportions, inviting candlelit warmth, whimsical but grounded
+painterly: Visible brushstroke texture, rich color blending of gold and purple, impressionistic details, atmospheric depth, dramatic chiaroscuro lighting
+</style_guide>
+
+<composition>
+Wide establishing shot or dramatic angle. Strong focal point such as a door, a creature, or a landmark. Depth with foreground detail, midground subject, and background atmosphere. Lighting tells the story: warm gold means safe, cold blue-purple means danger, mixed warm and cool means mystery. Always include at least one light source visible or implied in the scene. No characters shown from the front. Silhouettes or distant figures only.
+</composition>
+
+<scene_templates>
+
+tavern_interior: Dim interior lit by a crackling hearth and scattered candles. Heavy wooden beams, ale-stained tables, iron chandeliers. Warm amber light pools in the center, deep shadows in the corners. A bar with bottles catching firelight. Atmosphere of warmth, secrets, and stories. Digital painting, semi-realistic, fantasy RPG concept art.
+
+dark_forest: Ancient twisted trees with gnarled roots and thick canopy blocking most light. Faint moonlight or bioluminescent fungi provide eerie illumination. Mist curls between the trunks. A narrow path disappears into shadow. Deep purples and greens with occasional warm gold from a distant torch or firefly. Digital painting, semi-realistic, ominous and atmospheric.
+
+castle_ruins: Crumbling stone walls covered in ivy and moss. Broken towers silhouetted against a dramatic sky of purple and gold. Rubble and fallen pillars in the foreground. Remnants of grandeur visible in carved archways and faded banners. Last light of sunset or first light of dawn casting long shadows. Digital painting, semi-realistic, melancholy and majestic.
+
+cave_entrance: Yawning dark mouth in a rocky hillside or cliff face. Stalactites frame the opening. Warm torchlight from within casts dancing shadows on the stone. Outside, the landscape is wild and rocky. The contrast between the dark interior and the lit exterior creates depth and tension. Digital painting, semi-realistic, foreboding and inviting.
+
+village_square: A cobblestone square surrounded by half-timbered buildings with thatched or slate roofs. A central well or fountain. Market stalls with colorful cloth canopies. Warm lantern light from shop windows. Villagers as distant silhouettes going about their evening. Smoke rising from chimneys. Golden hour or dusk lighting. Digital painting, semi-realistic, cozy and lived-in.
+
+</scene_templates>
+
+<dalle3_format>
+When constructing the final prompt for the DALL-E 3 API, combine the elements into a single descriptive paragraph. Begin with the scene description, then add the mood and style direction, then add the Questcast visual identity keywords. Always append: "Digital painting, semi-realistic, dramatic lighting, fantasy RPG concept art, warm golds and deep purples color palette, torch-lit ambiance, no text, no watermarks, no realistic human faces."
+
+Example assembled prompt for DALL-E 3:
+"A dark medieval tavern interior with a crackling hearth casting amber light across heavy wooden tables. A mysterious cloaked figure sits alone in the corner, their face hidden in shadow. Candlelight glints off iron chandeliers. Smoke curls toward the beamed ceiling. Digital painting, semi-realistic, dramatic lighting, fantasy RPG concept art, warm golds and deep purples color palette, torch-lit ambiance, no text, no watermarks, no realistic human faces."
+</dalle3_format>
+
+<negative_prompt>
+Do not include: text, words, letters, numbers, watermarks, signatures, logos, UI elements, modern elements, cars, electricity, phones, computers, realistic human faces, photographic style, blurry, low quality, deformed, extra limbs, anime style, cartoon style, chibi, pixel art, voxel art, neon colors, oversaturated colors, flat lighting, stock photo aesthetic
+</negative_prompt>

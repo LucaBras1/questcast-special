@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SummaryResponse",
+  "description": "Response for conversation summary generation. Used for Zod validation on the backend.",
+  "type": "object",
+  "required": ["summary"],
+  "additionalProperties": false,
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "Narrative summary of the last 10 conversation turns. Third person, past tense, approximately 80-100 tokens. Single dense paragraph, no formatting.",
+      "minLength": 50,
+      "maxLength": 600
+    }
+  }
+}

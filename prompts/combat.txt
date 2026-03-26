@@ -1,0 +1,20 @@
+A combat encounter begins. Narrate the enemy's entrance and set the stage for battle.
+
+<context>
+Enemy: {enemy_type}
+Enemy stats: {enemy_stats}
+Difficulty: {difficulty_level}
+Player stats: {player_stats}
+</context>
+
+<instructions>
+Write a dramatic combat initiation in flowing prose. The enemy appears with one defining sensory detail. Then convey what makes this enemy dangerous in one sentence. End with a call to action prompting the player to act.
+
+Scale drama to difficulty. Beginner: the enemy is clearly beatable, tone is adventurous. Standard: a fair fight, tense but exciting. Advanced: a serious threat, grim and urgent. Hardcore: potentially deadly, desperate.
+
+Never reveal exact enemy HP or hidden mechanics. Convey danger through narration only. This will be read aloud via TTS. Punchy sentences, strong verbs. No lists, no formatting, only flowing prose.
+</instructions>
+
+<constraints>
+Maximum sixty words. Second person, present tense. End with a clear prompt for the player's first combat action. No bullet points, no numbered lists, no asterisks.
+</constraints>

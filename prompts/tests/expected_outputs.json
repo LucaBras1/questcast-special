@@ -1,0 +1,197 @@
+{
+  "version": "1.0.0",
+  "description": "Ideal reference responses for each test scenario. Used for quality comparison, not exact matching. The AI should produce responses of similar structure, tone, and correctness.",
+
+  "scenario-01": {
+    "name": "Combat: Goblin Attack",
+    "idealResponse": {
+      "narration": "You rip your blade free and charge. The goblin snarls, its crude axe raised high. It lunges with surprising speed, yellow eyes burning with fury. Steel meets rusted iron in a shower of sparks. The creature is small but vicious, and the dark cave amplifies every sound. Roll your dice and let fate decide who strikes first.",
+      "stateUpdates": {
+        "threatLevel": "high"
+      },
+      "suggestedActions": ["Roll the dice to attack", "Dodge and look for an opening", "Use your shield to block"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Should reference sword drawn by player. Should convey urgency. Should prompt for dice roll. Combat tone: tense, fast-paced."
+  },
+
+  "scenario-02": {
+    "name": "Exploration: Ancient Library",
+    "idealResponse": {
+      "narration": "Dust motes drift through shafts of pale light falling from cracked skylights above. Towering shelves sag under the weight of leather-bound tomes, some so old their titles have faded to ghosts. A faint hum of residual magic tingles against your skin. At the far end, a single book lies open on a stone lectern, its pages glowing faintly blue.",
+      "stateUpdates": {},
+      "suggestedActions": ["Examine the glowing book on the lectern", "Search the shelves for the Lost Tome", "Listen for sounds in the library"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Should describe library environment with sensory detail. Should hint at the quest (Lost Tome) without being heavy-handed. Mage class could trigger magical sensitivity."
+  },
+
+  "scenario-03": {
+    "name": "NPC Dialogue: Tavern Keeper",
+    "idealResponse": {
+      "narration": "The tavern keeper leans in close, lowering his voice beneath the noise of the crowd. Dragon, you say? He glances left and right. Two weeks back, a farmer ran in here white as bone. Said he saw something huge circle the northern peaks at dusk. Wings like sails, he said. Nobody believed him. But last night the same peaks glowed orange. You want my advice? Start at the northern pass.",
+      "stateUpdates": {},
+      "suggestedActions": ["Ask about the farmer", "Head toward the northern pass", "Buy a drink and listen for more rumors"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Tavern keeper should be in character (jovial archetype from npc_interaction.txt). Should advance the dragon quest with a lead. Should feel like natural dialogue."
+  },
+
+  "scenario-04": {
+    "name": "Dice Roll: Lockpicking",
+    "idealResponse": {
+      "narration": "Your fingers work the lock with practiced precision. This is what a rogue lives for. The tumblers resist, then surrender one by one. The mechanism clicks and the chest lid rises with a groan. Inside, something glints in the torchlight.",
+      "stateUpdates": {
+        "inventoryAdd": ["Royal Crown"]
+      },
+      "suggestedActions": ["Take the crown", "Check the chest for traps first", "Examine the crown closely"],
+      "shouldGenerateImage": false
+    },
+    "notes": "This scenario would use the dice_interpretation sub-prompt. The ideal output assumes a successful roll. Class-appropriate narration for rogue (precision, finesse). Should acknowledge the lockpicking action specifically."
+  },
+
+  "scenario-05": {
+    "name": "Session Start: New Adventure",
+    "idealResponse": {
+      "narration": "The Elderwood stretches before you, ancient and endless. Shafts of morning light pierce the canopy, illuminating a carpet of moss and fallen leaves. Birdsong echoes through the towering trunks, but deeper in the forest, something larger rustles through the undergrowth. A worn stone marker stands at the trailhead, its inscription weathered but still legible. Your journey begins here, Aria. The forest awaits your first step.",
+      "stateUpdates": {
+        "locationChange": "Elderwood Forest",
+        "timeOfDay": "morning",
+        "threatLevel": "low"
+      },
+      "suggestedActions": ["Read the stone marker", "Follow the main trail into the forest", "Listen to the sounds deeper in the forest"],
+      "shouldGenerateImage": true,
+      "imagePrompt": "Ancient vast forest with towering trees, morning light piercing through the canopy, moss-covered path leading into the depths, a weathered stone trail marker in the foreground, peaceful but mysterious atmosphere, digital painting, semi-realistic, fantasy RPG concept art"
+    },
+    "notes": "Opening turn. Must set the scene dramatically. Should mention character name (Aria). Should mention location (Elderwood). Should trigger an image since it is the first scene. Opening narration should be longer and more atmospheric than a mid-session turn."
+  },
+
+  "scenario-06": {
+    "name": "Session Resume: Continuing Adventure",
+    "idealResponse": {
+      "narration": "The mountain pass stretches before you, Thorin, just as you left it. Wind howls through the narrow gap between snow-capped peaks. You had been climbing for hours when you last rested, the dragon's lair somewhere above the clouds. The path ahead narrows. Fresh claw marks score the stone. Whatever waits above knows you are coming.",
+      "stateUpdates": {},
+      "suggestedActions": ["Continue climbing toward the lair", "Examine the claw marks", "Find a sheltered spot to prepare"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Recap scenario. Should use the recap sub-prompt. Must mention character name and location. Must rekindle urgency and remind player of the quest. Should feel like a 'Previously on...' moment."
+  },
+
+  "scenario-07": {
+    "name": "Cliffhanger: Session Ending",
+    "idealResponse": {
+      "narration": "The doors swing wide and reveal a throne room vast as a cathedral. But the throne is empty. Where the Shadow King should sit, there is only a mirror, tall as a man, its surface rippling like dark water. And in its reflection, you see not the room behind you, but yourself, wearing a crown of shadow. The mirror whispers your name.",
+      "stateUpdates": {
+        "locationChange": "Shadow Keep Throne Room"
+      },
+      "suggestedActions": [],
+      "shouldGenerateImage": true,
+      "imagePrompt": "Vast dark throne room with a massive ornate mirror on an empty throne, the mirror surface rippling with dark energy, dramatic shadows and purple light, cathedral-like gothic architecture, fantasy RPG concept art"
+    },
+    "notes": "Cliffhanger at turn 28 near end of session. Should use the cliffhanger sub-prompt. Must end on a powerful image or question. The suggested actions should be empty or minimal since the session is ending. Should trigger an image for the dramatic moment."
+  },
+
+  "scenario-08": {
+    "name": "Czech Language: Combat",
+    "idealResponse": {
+      "narration": "Tasite mec a vrhnete se vpred. Goblin zavrci a ustoupi o krok, ale pak se vzepre. Jeho rezava cepel se mihne vzduchem. Ocel narazí na ocel a jiskry ozari temnou jeskyni. Nestvura je rychla a nebezpecna. Hodte kostkou a zjistete, zda vas uder najde cil.",
+      "stateUpdates": {
+        "threatLevel": "high"
+      },
+      "suggestedActions": ["Hodit kostkou na utok", "Uhnout a hledat slabinu", "Pouzit stit k obrane"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Czech combat. Must be entirely in Czech with proper diacritics. Should use dramatic Czech verbs (tasit, vrhnout, vzeprit se). Should not sound like translated English. suggestedActions must also be in Czech."
+  },
+
+  "scenario-09": {
+    "name": "English Language: Peaceful Exploration",
+    "idealResponse": {
+      "narration": "You settle onto the mossy bank and let the sound of the Crystal River wash over you. The water runs clear and cold, catching sunlight in a thousand tiny diamonds. Your muscles unwind. A kingfisher darts across the surface, a flash of blue and amber. Somewhere downstream, the faint sound of a mill wheel turning. Peace, for now.",
+      "stateUpdates": {},
+      "suggestedActions": ["Follow the river downstream toward the mill", "Search the riverbank for herbs", "Continue resting and listen for anything unusual"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Peaceful exploration moment. Should be atmospheric and calming. Should mention the Crystal River location. Tone is restful but hints at the world continuing around the player. No combat, no urgency."
+  },
+
+  "scenario-10": {
+    "name": "Edge Case: Nonsensical Player Input",
+    "idealResponse": {
+      "narration": "Strange words echo through the cave, words that do not belong here. The damp stone walls absorb them and move on. The cave does not care about what lies beyond its darkness. What matters is the path ahead, the faint glow deeper in the tunnel, and the scratching sounds growing louder. What do you actually intend to do?",
+      "stateUpdates": {},
+      "suggestedActions": ["Investigate the scratching sounds", "Explore deeper into the cave", "Go back toward the entrance"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Graceful handling of nonsensical input. Should NOT break character. Should NOT acknowledge modern concepts (pizza, phone). Should redirect to the game world naturally. Should end with a prompt toward valid action."
+  },
+
+  "scenario-11": {
+    "name": "Image Trigger: Scene Transition",
+    "idealResponse": {
+      "narration": "The iron doors groan open beneath your hands, revealing a chamber of staggering scale. The throne room of Shadow Keep stretches before you, its vaulted ceiling lost in darkness. Pillars of black stone march in two lines toward a distant throne. Purple light seeps from cracks in the walls. The air tastes of old magic and something burning. Every shadow in this room seems to watch you enter.",
+      "stateUpdates": {
+        "locationChange": "Shadow Keep Throne Room",
+        "threatLevel": "critical"
+      },
+      "suggestedActions": ["Approach the throne cautiously", "Examine the glowing cracks in the walls", "Prepare a defensive spell"],
+      "shouldGenerateImage": true,
+      "imagePrompt": "Vast dark throne room with rows of black stone pillars, purple magical light seeping from wall cracks, a distant ornate throne shrouded in shadow, vaulted gothic ceiling, ominous and grand atmosphere, digital painting, semi-realistic, fantasy RPG concept art, dramatic lighting"
+    },
+    "notes": "Must set shouldGenerateImage to true. Must include an imagePrompt in English describing the scene. The imagePrompt should match the Questcast visual identity (warm golds, deep purples). Location change to throne room should be reflected in stateUpdates."
+  },
+
+  "scenario-12": {
+    "name": "Tutorial: Beat 1 First Encounter",
+    "idealResponse": {
+      "narration": "Your eyes snap open. The air is thick with smoke and old ale. You are sitting in the dark corner of a tavern you have never seen before. Across the table, a cloaked figure watches you. Candlelight catches their eyes. So, you are awake, a quiet voice says. Interesting. Tell me, what do they call you?",
+      "stateUpdates": {
+        "locationChange": "Old Tavern"
+      },
+      "suggestedActions": ["Say your name", "Ask where you are"],
+      "shouldGenerateImage": true,
+      "imagePrompt": "Dark medieval tavern interior, candlelight, mysterious cloaked figure sitting across a wooden table, smoke and shadows, fantasy RPG atmosphere",
+      "tutorialBeat": 1
+    },
+    "notes": "Must include tutorialBeat: 1 in the response. Must set shouldGenerateImage to true for the opening tavern scene. Must ask the player their name. Must set the mysterious, inviting tone of the tutorial. Should NOT explain game mechanics directly."
+  },
+
+  "scenario-13": {
+    "name": "Long Session: Turn 25+ Coherence with Summary",
+    "idealResponse": {
+      "narration": "You find Elder Maren where you left her, hunched over a table of dried herbs and worry. When you place the ward stone fragment before her, the color drains from her weathered face. She turns it in her trembling fingers. This was broken from the inside, she whispers. Someone in our village did this. Her eyes meet yours, heavy with a question she is afraid to ask.",
+      "stateUpdates": {
+        "questProgress": 0.70
+      },
+      "suggestedActions": ["Show her the inscription about the saboteur", "Ask who had access to the ward stones", "Suggest gathering the villagers to investigate"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Must reference the narrative summary accurately: ward stone fragment, Elder Maren, the sabotage from within the village. Must NOT contradict established events. Must advance the quest logically based on accumulated context. Tests long-term coherence."
+  },
+
+  "scenario-14": {
+    "name": "Multi-Turn Combat: Round 3",
+    "idealResponse": {
+      "narration": "Uhnete stranou a mec vam zasvisti v ruce. Cepel narazí na trolluv kamenný bok a odskoci s ohlušujícím zvonenim. Tvor zarve bolesti a odplati vam to ranou pazourem. Krev vam tece z rany na rameni. Jste unaveni a kazdy nadech pali. Ale troll se potaci. Jeste neskonci. Hodte kostkou!",
+      "stateUpdates": {
+        "healthDelta": -4
+      },
+      "suggestedActions": ["Hodit kostkou na utok", "Pokusit se o uskok", "Vyuzit slabinu trolla"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Czech combat, round 3. Must reflect low HP tension (12/40). Must feel like a desperate ongoing fight, not a fresh encounter. Must reference the troll specifically. Tone should be grim and urgent. suggestedActions in Czech. Should prompt for a dice roll."
+  },
+
+  "scenario-15": {
+    "name": "NPC Merchant Negotiation",
+    "idealResponse": {
+      "narration": "Merchant Halvir pauses mid-polish of a silver dagger. He sets it down slowly. Half, you say? He begins to shake his head, then stops. His eyes narrow as he remembers the bandits, the broken wheel, his goods scattered across the road. And you, standing between him and ruin. He sighs deeply. For you, I make an exception. Two thirds. And you get my gratitude, which is worth more than gold in this market.",
+      "stateUpdates": {
+        "goldDelta": -30
+      },
+      "suggestedActions": ["Accept the deal", "Push for an even lower price", "Ask what else he has in stock"],
+      "shouldGenerateImage": false
+    },
+    "notes": "Must reference the NPC by name (Halvir). Must reference the previous key decision (saving the caravan). Must handle the negotiation as a social interaction. The merchant archetype should match the 'greedy but grateful' personality. Should NOT require a dice roll for a favor-based negotiation."
+  }
+}

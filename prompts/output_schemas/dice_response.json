@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiceResponse",
+  "description": "Response for dice roll interpretation. Used for Zod validation on the backend.",
+  "type": "object",
+  "required": ["narration", "success", "stateUpdates"],
+  "additionalProperties": false,
+  "properties": {
+    "narration": {
+      "type": "string",
+      "description": "Dramatic interpretation of the roll result. Flowing prose, 30-50 words, optimized for TTS. Two to three sentences.",
+      "minLength": 10,
+      "maxLength": 400
+    },
+    "success": {
+      "type": "boolean",
+      "description": "Whether the roll succeeded. True if final result meets or exceeds the difficulty class."
+    },
+    "stateUpdates": {
+      "type": "object",
+      "description": "Game state changes resulting from the roll outcome. Only include fields that changed.",
+      "additionalProperties": false,
+      "properties": {
+        "healthDelta": {
+          "type": "number",
+          "description": "Change in HP from the roll outcome."
+        },
+        "inventoryAdd": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Items gained as a result of the roll."
+        },
+        "inventoryRemove": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Items lost as a result of the roll."
+        },
+        "goldDelta": {
+          "type": "number",
+          "description": "Gold gained or lost from the roll outcome."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+Describe the scene as the player enters a new location.
+
+<context>
+Location: {location}
+Time of day: {time_of_day}
+Weather: {weather}
+Threat level: {threat_level}
+</context>
+
+<instructions>
+Write a scene description in flowing prose that includes one dominant visual detail defining the place, one ambient sound setting the atmosphere, one notable feature or NPC catching the eye, and one subtle hint at a possible action or hidden element.
+
+Adapt tone to threat level. Low: peaceful, inviting, emphasize beauty or comfort. Moderate: atmospheric, hints of unease beneath the surface. High: tense, shadows, ominous signs. Critical: immediate danger, hostile environment, urgency.
+
+Match time of day to lighting and mood. Weather affects sensory details.
+
+This will be read aloud via TTS. Use short vivid sentences. No lists, no parenthetical notes, no formatting. Only flowing prose.
+</instructions>
+
+<constraints>
+Maximum sixty words. Second person. End with an implicit invitation to explore or act, not a direct question. Never use bullet points, numbered lists, or asterisks.
+</constraints>

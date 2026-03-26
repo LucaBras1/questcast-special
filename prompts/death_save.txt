@@ -1,0 +1,56 @@
+DEATH SAVE MECHANIC -- Triggered when player health reaches 0.
+The backend detects HP 0 and injects this prompt as additional context for the AI's response.
+Output must include narration and stateUpdates in the standard JSON format.
+
+<trigger_condition>
+Player health has reached 0. The character has fallen. This triggers a death save sequence.
+Never allow permanent death in the MVP. The player always survives, but the method and drama depend on their roll.
+</trigger_condition>
+
+<phase_1_fall>
+Narrate the character falling. Use dramatic sensory language. The world fades. Vision blurs. Sound becomes distant. Use exactly this tone: grim but not hopeless.
+
+English version:
+"Darkness closes in at the edges of your vision. Your knees buckle and the ground rushes up to meet you. Sound fades to a distant hum. You feel cold, impossibly cold. Somewhere far away, you hear a voice calling your name."
+
+Czech version:
+"Tma se stahuje na okrajich vaseho zorneho pole. Kolena se pod vami podlomi a zem se ritii vstric. Zvuky se vzdaluji v nekonecnou ozvenu. Citite zimu, pronikavou a nesnesitelnou. Nekde daleko zaslechnte hlas, ktery vola vase jmeno."
+
+After the fall narration, prompt the player for a d20 death save roll.
+</phase_1_fall>
+
+<phase_2_roll>
+The player rolls a d20.
+
+Success (roll 10 or higher):
+The character stabilizes at 1 HP. Narrate a dramatic revival. The source of revival should match the situation: willpower in combat, a surge of magic for a mage, a survival instinct for a ranger, sheer stubbornness for a warrior, cunning luck for a rogue.
+
+English success examples:
+"Light pierces the darkness. A surge of pure will pulls you back from the edge. Your eyes snap open. You are alive. Barely. Every breath burns, but you are breathing. You push yourself to one knee."
+"Something ancient and warm floods through your veins. The cold retreats. Your heartbeat steadies, then strengthens. You cough, gasp, and force your eyes open. The fight is not over."
+
+Czech success examples:
+"Svetlo protne tmu. Vlna ciste vule vas vytrhne z okraje propasti. Oci se vam rozsiri. Zijete. Sotva. Kazdy nadech pali, ale dychate. Zvednete se na jedno koleno."
+"Neco pradavneho a hrejiviho vam zaplavy zilami. Zima ustoupi. Srdce se vam uklidni a pak zesili. Zakaslete, zalaete po dechu a prinutite se otevrit oci. Boj jeste neskonci."
+
+Output for success:
+{"narration": "[revival text]", "stateUpdates": {"healthDelta": 1}, "suggestedActions": ["Retreat and find cover", "Use a healing potion", "Press on carefully"]}
+
+Failure (roll 9 or lower):
+A mysterious force revives the character. This is not the player's doing. Something external intervenes: a strange light, an unseen hand, a whispered incantation from nowhere. The character stabilizes at 1 HP but is left with questions.
+
+English failure examples:
+"The darkness deepens. You are certain this is the end. Then a hand you cannot see grips your shoulder. Warmth floods through you, sharp and sudden. Your eyes open. You did not save yourself. Something else did. You are alive, but you do not know why."
+"Silence. Perfect, total silence. Then a whisper in a language you have never heard. The cold breaks like glass and you gasp back to life. One hit point. One question. Who saved you?"
+
+Czech failure examples:
+"Tma houstne. Jste si jisti, ze tohle je konec. Pak vas za rameno uchopi ruka, kterou nevidite. Teplo vami projede, ostre a nahle. Otevrete oci. Nezachranili jste se sami. Neco jineho to udelalo. Zijete, ale nevite proc."
+"Ticho. Dokonale, absolutni ticho. Pak sepot v jazyce, ktery jste nikdy neslyeli. Zima se roztřísti jako sklo a vy se zachvativě nadechnete. Jeden bod zdravi. Jedna otazka. Kdo vas zachranil?"
+
+Output for failure:
+{"narration": "[mysterious revival text]", "stateUpdates": {"healthDelta": 1}, "suggestedActions": ["Rest and recover", "Investigate the mysterious force", "Retreat to safety"]}
+</phase_2_roll>
+
+<constraints>
+Maximum eighty words for the fall narration. Maximum sixty words for the revival narration. Second person. Flowing prose only. No lists, no formatting. Written for TTS. The death save must feel dramatic and meaningful even though the player always survives. Never trivialize the moment.
+</constraints>

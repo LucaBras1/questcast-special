@@ -1,0 +1,77 @@
+ATMOSPHERIC TRANSITIONS -- Brief one-sentence narrations injected between turns to convey time passing, weather changes, or threat level shifts. The backend selects the appropriate category and the AI picks or adapts one line.
+
+<rules>
+One sentence maximum. Evocative and sensory. Never interrupt gameplay flow. These are seasoning, not story beats. Write for TTS. No lists, no formatting.
+</rules>
+
+<category name="time_passing">
+English:
+"The sun crawls higher and the shadows shrink beneath your feet."
+"Afternoon light slants golden through the trees."
+"Dusk settles over the land like a slow exhale."
+"Stars blink awake one by one above you."
+"The moon hangs full and pale, painting everything in silver."
+"Dawn bleeds red along the horizon."
+
+Czech:
+"Slunce stoupá výš a stíny se krčí pod vašima nohama."
+"Odpolední světlo prosvítá zlatě skrze koruny stromů."
+"Soumrak se snáší na krajinu jako pomalý výdech."
+"Hvězdy nad vámi problikávají k životu jedna po druhé."
+"Měsíc visí plný a bledý a barví vše do stříbra."
+"Úsvit krvácí rudě po obzoru."
+</category>
+
+<category name="weather_change">
+English:
+"Clouds gather on the horizon like a dark army."
+"The first drops of rain tap against your shoulders."
+"Thunder rumbles in the distance, a low warning."
+"The rain stops and steam rises from the warm stones."
+"Wind picks up, carrying the scent of pine and distant snow."
+"Fog rolls in, swallowing the path ahead."
+
+Czech:
+"Mraky se shromažďují na obzoru jako temná armáda."
+"První kapky deště vám bubnují na ramena."
+"V dálce zaburáci hrom, hluboké varování."
+"Déšť přestane a z teplých kamenů stoupá pára."
+"Vítr zesílí a přináší vůni borovic a vzdáleného sněhu."
+"Mlha se valí krajinou a pohlcuje cestu před vámi."
+</category>
+
+<category name="threat_escalation">
+English:
+"Something watches you from the treeline."
+"The air grows heavy with the promise of danger."
+"A distant howl echoes through the valley."
+"Smoke rises from beyond the ridge, thick and black."
+"The ground trembles faintly beneath your boots."
+"Silence falls, the kind that comes before violence."
+
+Czech:
+"Něco vás pozoruje z okraje lesa."
+"Vzduch ztěžkne příslibem nebezpečí."
+"Údolím se rozléhá vzdálené zavytí."
+"Za hřebenem stoupá dým, hustý a černý."
+"Země se pod vašima botama neznatelně chvěje."
+"Padne ticho, ten druh co přichází před násilím."
+</category>
+
+<category name="threat_decrease">
+English:
+"The tension in the air eases like a held breath released."
+"Birdsong returns to the trees around you."
+"The path ahead opens into a sun-drenched clearing."
+"You hear laughter carried on the wind from a nearby settlement."
+"The forest feels friendlier here, the shadows less sharp."
+"A stream murmurs beside the path, cool and inviting."
+
+Czech:
+"Napětí ve vzduchu povolí jako zadržený dech."
+"Do korun stromů se vrací ptačí zpěv."
+"Cesta před vámi se otevírá do sluncem zalité mýtiny."
+"Vítr k vám přináší smích z nedaleké osady."
+"Les tu působí přátelštěji, stíny jsou méně ostré."
+"Podél cesty zurčí potůček, chladný a lákavý."
+</category>

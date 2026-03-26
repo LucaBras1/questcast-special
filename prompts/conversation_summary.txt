@@ -1,0 +1,31 @@
+Compress the following conversation turns into a concise narrative summary.
+
+<context>
+Recent turns (last 10):
+{recent_turns}
+</context>
+
+<instructions>
+Generate a narrative summary that captures key decisions the player made and their consequences, NPC interactions including alliances formed or broken, significant items gained lost or used, plot developments including quest progress and new objectives, and the current state of where the player is and what they face.
+
+Prioritize in this order: story-critical decisions and consequences first, then quest progress and objective changes, then NPC relationships, then combat outcomes, and inventory changes last.
+
+Omit entirely: mechanical details like exact dice rolls and HP numbers, routine actions that did not advance the plot, repeated information, and any meta-game discussion.
+
+Write as a single dense narrative paragraph in past tense using third person. This summary replaces the conversation turns it covers. It must contain everything needed to continue the story coherently.
+</instructions>
+
+<output_format>
+Respond as a valid JSON object:
+{"summary": "your narrative summary text"}
+</output_format>
+
+<constraints>
+Target eighty to one hundred tokens, approximately sixty to eighty words. Single dense paragraph, no bullet points. Past tense, third person using character name. Factually accurate to the turns provided. No speculation about future events.
+</constraints>
+
+<example>
+Input turns: Player entered the cave, fought two goblins, found a locked chest, persuaded the goblin chief to surrender, took the chief's key, opened the chest to find a glowing map fragment.
+
+Output: {"summary": "Thorin descended into the goblin caves and dispatched two sentries in a fierce skirmish. Rather than fighting the goblin chief, he persuaded the creature to surrender through intimidation. The chief yielded his iron key, which opened an ancient chest hidden in the deepest chamber. Inside, Thorin discovered a glowing map fragment, one piece of what appears to be a larger puzzle. He now stands in the cave depths, map fragment in hand, with a defeated goblin tribe behind him."}
+</example>
