@@ -76,6 +76,13 @@ export async function gameRoutes(app: FastifyInstance) {
           },
         },
       },
+      config: {
+        rateLimit: {
+          max: 5,
+          timeWindow: '1 minute',
+          keyGenerator: (request: FastifyRequest) => `session:create:${request.userId}`,
+        },
+      },
       preHandler: [validateBody(createSessionSchema)],
     },
     async (request: FastifyRequest<{ Body: CreateSessionInput }>, reply: FastifyReply) => {

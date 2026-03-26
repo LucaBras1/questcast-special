@@ -70,6 +70,23 @@ export async function turnRoutes(app: FastifyInstance) {
   app.post(
     '/session/:id/turn',
     {
+      schema: {
+        tags: ['Turn'],
+        summary: 'Process a player turn via SSE (STT -> LLM -> TTS pipeline)',
+        description: 'Responds with Server-Sent Events. Event types: turn_start, transcription, moderation_pass, narration_chunk, narration_complete, tts_chunk, tts_complete, state_update, turn_end, error, time_warning, session_limit_reached, image_ready.',
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: { id: { type: 'string', format: 'uuid' } },
+        },
+        body: {
+          type: 'object',
+          properties: {
+            audioBase64: { type: 'string', description: 'Base64-encoded audio (WebM/Opus)' },
+            textInput: { type: 'string', maxLength: 1000, description: 'Text input (alternative to audio)' },
+          },
+        },
+      },
       config: {
         rateLimit: {
           max: 2,

@@ -22,6 +22,7 @@ import {
 } from '../../../shared/constants/index.js';
 import { getAIService } from '../ai/index.js';
 import { assembleRecapPrompt, assembleSystemPrompt } from './prompt-service.js';
+import { trackSessionStart, trackSessionEnd } from './analytics.js';
 
 /**
  * Default starting game state for a new session.
@@ -109,6 +110,9 @@ export async function createSession(userId: string, input: CreateSessionInput) {
   }
 
   logger.info('Game session created', { sessionId, userId, characterName: input.characterName });
+
+  // Track analytics event
+  trackSessionStart(userId, sessionId, input.characterClass, input.language ?? 'en');
 
   return {
     id: session.id,
@@ -433,6 +437,21 @@ export async function updateSessionStatus(
   // ---- active -> completed: final save ----
   if (currentStatus === 'active' && newStatus === 'completed') {
     await saveSessionFull(sessionId);
+
+    // Track session end analytics
+    try {
+      const gameState = await getGameState(sessionId);
+      trackSessionEnd(
+        userId,
+        sessionId,
+        gameState.session.turnsPlayed,
+        Math.round(gameState.session.timeElapsedMinutes),
+        'manual',
+      );
+    } catch {
+      // Analytics failure should not block session completion
+    }
+
     logger.info('Session completed with final save', { sessionId });
   }
 

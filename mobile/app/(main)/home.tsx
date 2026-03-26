@@ -30,6 +30,8 @@ import { useAuthStore } from '../../stores/authStore';
 import { useGameStore, GameSessionSummary } from '../../stores/gameStore';
 import { apiClient } from '../../services/api';
 import { A11yHints } from '../../utils/accessibility';
+import { isTutorialCompleted } from './tutorial';
+import { HomeLoadingSkeleton } from '../../components/LoadingSkeleton';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -80,6 +82,16 @@ export default function HomeScreen() {
   useEffect(() => {
     fetchSessions();
   }, [fetchSessions]);
+
+  // Auto-trigger tutorial for first-time users
+  useEffect(() => {
+    (async () => {
+      const completed = await isTutorialCompleted();
+      if (!completed) {
+        router.replace('/(main)/tutorial');
+      }
+    })();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Trigger staggered animations when sessions are first loaded
   useEffect(() => {
@@ -343,7 +355,13 @@ export default function HomeScreen() {
           data={otherSessions}
           renderItem={renderSessionItem}
           keyExtractor={(item) => item.id}
-          ListEmptyComponent={!activeSession ? renderEmptyState : null}
+          ListEmptyComponent={
+            sessionsLoading && !hasLoadedOnce
+              ? () => <HomeLoadingSkeleton />
+              : !activeSession
+                ? renderEmptyState
+                : null
+          }
           showsVerticalScrollIndicator={false}
           contentContainerStyle={
             otherSessions.length === 0 && !activeSession

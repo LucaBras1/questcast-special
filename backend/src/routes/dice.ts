@@ -84,6 +84,43 @@ export async function diceRoutes(app: FastifyInstance) {
   app.post(
     '/session/:id/dice',
     {
+      schema: {
+        tags: ['Dice'],
+        summary: 'Roll dice with AI narration of the outcome',
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: { id: { type: 'string', format: 'uuid' } },
+        },
+        body: {
+          type: 'object',
+          required: ['diceType', 'actionType'],
+          properties: {
+            diceType: { type: 'string', enum: ['d4', 'd6', 'd8', 'd10', 'd12', 'd20'] },
+            actionType: { type: 'string', minLength: 1, maxLength: 50 },
+            modifiers: { type: 'number', minimum: -20, maximum: 20, default: 0 },
+          },
+        },
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              rollValue: { type: 'number' },
+              diceType: { type: 'string' },
+              modifiers: { type: 'number' },
+              total: { type: 'number' },
+              difficultyClass: { type: 'number' },
+              success: { type: 'boolean' },
+              resultCategory: { type: 'string' },
+              narration: { type: 'string' },
+              audioUrl: { type: 'string' },
+              stateUpdates: { type: 'object' },
+              combat: { type: 'object' },
+              cost: { type: 'object' },
+            },
+          },
+        },
+      },
       config: {
         rateLimit: {
           max: 5,

@@ -4,38 +4,38 @@
 
   "cs": {
     "generic_continue": [
-      "Svet kolem vas na okamzik zavahal, jako by sama realita zadrzela dech. Pak se vsechno vrati do normalu. Co chcete delat dal?",
-      "Podivny stun proletl krajinou, ale rychle odeznel. Vase dobrodruzstvi pokracuje. Jak se rozhodnete?",
-      "Vzduch se zachvel neviditelnou energii. Cokoliv to bylo, pominulo to. Jste pripraveni pokracovat?"
+      "Svět kolem vás na okamžik zaváhal, jako by sama realita zadržela dech. Pak se všechno vrátí do normálu. Co chcete dělat dál?",
+      "Podivný šum prolétl krajinou, ale rychle odezněl. Vaše dobrodružství pokračuje. Jak se rozhodnete?",
+      "Vzduch se zachvěl neviditelnou energií. Cokoliv to bylo, pominulo to. Jste připraveni pokračovat?"
     ],
     "combat_continue": [
-      "Bitva pokracuje! Vas nepritel pred vami stoji ve strehu. Je rada na vas -- jak zautocite?",
-      "Prach boje se jeste neusadil. Vas protivnik se pripravuje na dalsi utok. Co udelate?",
-      "Zvuk oceli jeste zni vzduchem. Nepritel cerpa silu. Jak odpovidite?"
+      "Bitva pokračuje! Váš nepřítel před vámi stojí ve střehu. Je řada na vás. Jak zaútočíte?",
+      "Prach boje se ještě neusadil. Váš protivník se připravuje na další útok. Co uděláte?",
+      "Zvuk oceli ještě zní vzduchem. Nepřítel čerpá sílu. Jak odpovíte?"
     ],
     "exploration_continue": [
-      "Cesta pred vami se vine dal do neznama. Kazdy krok vas priblizuje k odpovedi. Kam pujdete?",
-      "Krajina kolem vas skryva jeste mnoho tajemstvi. Co vas laka prozkoumat?",
-      "Stojite na rozcesti moznosti. Vzduch je plny prislibu dobrodruzstvi. Ktery smer zvolite?"
+      "Cesta před vámi se vine dál do neznáma. Každý krok vás přibližuje k odpovědi. Kam půjdete?",
+      "Krajina kolem vás skrývá ještě mnoho tajemství. Co vás láká prozkoumat?",
+      "Stojíte na rozcestí možností. Vzduch je plný příslibu dobrodružství. Který směr zvolíte?"
     ],
     "error_acknowledgment": [
-      "Magicke energie kolem vas na okamzik zakolisaly. Svet se stabilizuje. Pokracujme v pribehu.",
-      "Tajemna sila na chvili zatemnila vase smysly, ale vsechno je zase v poradku.",
-      "Realita se na okamzik zamlzila jako ranni opar. Teraz je ale vse jasne. Co budete delat?"
+      "Magické energie kolem vás na okamžik zakolísaly. Svět se stabilizuje. Pokračujme v příběhu.",
+      "Tajemná síla na chvíli zatemnila vaše smysly, ale všechno je zase v pořádku.",
+      "Realita se na okamžik zamlžila jako ranní opar. Teď je ale vše jasné. Co budete dělat?"
     ],
     "session_save": [
-      "Vase dobrodruzstvi bylo zaznamenano v kronikach. Az budete pripraveni, pribeh bude cekat.",
-      "Hra ulozena. Osud je trpelivy -- vrati se pro vas, az prijde cas.",
-      "Kroniky si zapamatovaly vase ciny. Dobrodruzstvi na vas bude cekat."
+      "Vaše dobrodružství bylo zaznamenáno v kronikách. Až budete připraveni, příběh bude čekat.",
+      "Hra uložena. Osud je trpělivý. Vrátí se pro vás, až přijde čas.",
+      "Kroniky si zapamatovaly vaše činy. Dobrodružství na vás bude čekat."
     ],
     "dice_roll_fallback": [
-      "Kostky osudu se otoci... Vysledek je nejasny, ale pribeh pokracuje. Co delate dal?",
-      "Sily osudu na chvili zakolisaly. Akce probiha s neurcitym vysledkem. Pokracujte.",
-      "Kostka se zakuti ve vzduchu a pristane na hrane. Osud vaha. Nakonec se prikloní na vasi stranu. Pokracujte v akci."
+      "Kostky osudu se otočí. Výsledek je nejasný, ale příběh pokračuje. Co děláte dál?",
+      "Síly osudu na chvíli zakolísaly. Akce probíhá s neurčitým výsledkem. Pokračujte.",
+      "Kostka se zakutí ve vzduchu a přistane na hraně. Osud váhá. Nakonec se přikloní na vaši stranu. Pokračujte v akci."
     ],
     "session_timeout": [
-      "Unaveni padne na vase vicky. Je cas odpocivat, dobrodruzne. Vas pribeh bude cekat na vase navrat.",
-      "Nocni tma vas obklopi jako deka. Je cas ulozit se. Dobrodruzstvi pokracuje priste."
+      "Únava padne na vaše víčka. Je čas odpočívat, dobrodruhu. Váš příběh bude čekat na váš návrat.",
+      "Noční tma vás obklopí jako deka. Je čas uložit se. Dobrodružství pokračuje příště."
     ]
   },
 

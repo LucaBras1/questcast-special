@@ -35,6 +35,43 @@ export async function imageRoutes(app: FastifyInstance) {
   app.post(
     '/session/:id/image',
     {
+      schema: {
+        tags: ['Image'],
+        summary: 'Generate an AI scene image for the current session',
+        security: [{ bearerAuth: [] }],
+        params: {
+          type: 'object',
+          properties: { id: { type: 'string', format: 'uuid' } },
+        },
+        body: {
+          type: 'object',
+          required: ['sceneDescription', 'artStyle'],
+          properties: {
+            sceneDescription: { type: 'string', minLength: 10, maxLength: 500 },
+            artStyle: { type: 'string', enum: ['epic_fantasy', 'dark_atmospheric', 'storybook', 'painterly'] },
+          },
+        },
+        response: {
+          200: {
+            type: 'object',
+            properties: {
+              imageUrl: { type: 'string' },
+              prompt: { type: 'string' },
+              cached: { type: 'boolean' },
+            },
+          },
+        },
+      },
+      config: {
+        rateLimit: {
+          max: 3,
+          timeWindow: '1 minute',
+          keyGenerator: (request: FastifyRequest) => {
+            const params = request.params as { id: string };
+            return `image:${params.id}`;
+          },
+        },
+      },
       preHandler: [
         validateParams(sessionIdParamSchema),
         validateBody(imageRequestSchema),

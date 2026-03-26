@@ -143,6 +143,14 @@ export async function markTutorialCompleted(): Promise<void> {
   }
 }
 
+export async function resetTutorialCompleted(): Promise<void> {
+  try {
+    await AsyncStorage.removeItem(TUTORIAL_COMPLETED_KEY);
+  } catch {
+    // Non-critical
+  }
+}
+
 // ============================================
 // Tutorial Screen
 // ============================================
@@ -379,7 +387,7 @@ export default function TutorialScreen() {
             <Text style={styles.narratorIcon}>{'\uD83C\uDFAD'}</Text>
             <Text style={styles.narratorLabel}>Dungeon Master</Text>
           </View>
-          <Text style={styles.narrationText}>{beat.narration}</Text>
+          <Text style={styles.narrationText}>{beat.narration[lang]}</Text>
         </Animated.View>
       </View>
 
@@ -398,17 +406,17 @@ export default function TutorialScreen() {
             <Animated.View
               style={[styles.instructionBadge, { opacity: highlightPulse }]}
             >
-              <Text style={styles.instructionBadgeText}>{beat.teaches.toUpperCase()}</Text>
+              <Text style={styles.instructionBadgeText}>{beat.teaches[lang].toUpperCase()}</Text>
             </Animated.View>
-            <Text style={styles.instructionTitle}>{beat.title}</Text>
-            <Text style={styles.instructionText}>{beat.instruction}</Text>
+            <Text style={styles.instructionTitle}>{beat.title[lang]}</Text>
+            <Text style={styles.instructionText}>{beat.instruction[lang]}</Text>
             <TouchableOpacity
               onPress={handleDismissInstruction}
               style={styles.gotItButton}
               accessibilityLabel={A11yLabels.gotIt}
               accessibilityRole="button"
             >
-              <Text style={styles.gotItText}>Got it!</Text>
+              <Text style={styles.gotItText}>{lang === 'cs' ? 'Rozumim!' : 'Got it!'}</Text>
             </TouchableOpacity>
           </View>
         </Animated.View>
@@ -428,14 +436,16 @@ export default function TutorialScreen() {
             >
               <Text style={styles.micIcon}>{'\uD83D\uDD2E'}</Text>
             </TouchableOpacity>
-            <Text style={styles.micHint}>Tap the orb to speak</Text>
+            <Text style={styles.micHint}>
+              {lang === 'cs' ? 'Klepnete na kouli a mluvte' : 'Tap the orb to speak'}
+            </Text>
           </Animated.View>
         )}
 
         {/* Beat 3: Choice buttons */}
         {beat.highlightElement === 'choices' && beat.choices && !showInstruction && (
           <View style={styles.choicesContainer}>
-            {beat.choices.map((choice, idx) => (
+            {beat.choices[lang].map((choice, idx) => (
               <TouchableOpacity
                 key={idx}
                 onPress={() => handleChoice(choice)}
@@ -465,12 +475,12 @@ export default function TutorialScreen() {
                 accessibilityHint={A11yHints.diceRoll}
               >
                 <Text style={styles.diceIcon}>{'\uD83C\uDFB2'}</Text>
-                <Text style={styles.diceText}>Roll d20!</Text>
+                <Text style={styles.diceText}>{lang === 'cs' ? 'Hod d20!' : 'Roll d20!'}</Text>
               </TouchableOpacity>
             ) : (
               <View style={styles.diceResult}>
                 <Text style={styles.diceResultNumber}>17</Text>
-                <Text style={styles.diceResultLabel}>Success!</Text>
+                <Text style={styles.diceResultLabel}>{lang === 'cs' ? 'Uspech!' : 'Success!'}</Text>
               </View>
             )}
           </View>
@@ -484,7 +494,7 @@ export default function TutorialScreen() {
             accessibilityLabel={A11yLabels.nextStep}
             accessibilityRole="button"
           >
-            <Text style={styles.continueText}>Continue</Text>
+            <Text style={styles.continueText}>{lang === 'cs' ? 'Pokracovat' : 'Continue'}</Text>
           </TouchableOpacity>
         )}
 
@@ -492,12 +502,16 @@ export default function TutorialScreen() {
         {beat.highlightElement === 'continue' && !showInstruction && (
           <View style={styles.completionContainer}>
             <Text style={styles.completionIcon}>{'\u2728'}</Text>
-            <Text style={styles.completionTitle}>Tutorial Complete!</Text>
+            <Text style={styles.completionTitle}>
+              {lang === 'cs' ? 'Tutorial dokoncen!' : 'Tutorial Complete!'}
+            </Text>
             <Text style={styles.completionSubtitle}>
-              You are ready to create your first hero.
+              {lang === 'cs'
+                ? 'Jste pripraveni vytvorit sveho prvniho hrdinu.'
+                : 'You are ready to create your first hero.'}
             </Text>
             <Button
-              title="Continue to Character Creation"
+              title={lang === 'cs' ? 'Pokracovat k tvorbe postavy' : 'Continue to Character Creation'}
               onPress={handleComplete}
               size="lg"
               fullWidth

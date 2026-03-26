@@ -175,6 +175,11 @@ Every `{variable}` placeholder across all prompt files, its source, and its expe
 | `{class}` | image_character.txt | `character.class` | string | -- |
 | `{gender}` | image_character.txt | Character creation | string | -- |
 | `{features}` | image_character.txt | Character creation | string | -- |
+| `{npc_type}` | image_npc_portrait.txt | NPC archetype or enemy type | string | `"merchant"` |
+| `{npc_race}` | image_npc_portrait.txt | NPC race | string | `"dwarf"` |
+| `{npc_role}` | image_npc_portrait.txt | NPC narrative role | string | `"quest giver"` |
+| `{npc_features}` | image_npc_portrait.txt | NPC distinctive visual features | string | -- |
+| `{disposition}` | image_npc_portrait.txt | NPC attitude toward player | string | `"friendly"` |
 | `{response_text}` | quality_evaluation.txt | AI response (test only) | string | -- |
 | `{language}` | quality_evaluation.txt | Test scenario language | string | -- |
 | `{player_input}` | quality_evaluation.txt | Test scenario input | string | -- |

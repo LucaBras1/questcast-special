@@ -232,7 +232,8 @@ prompts/
   conversation_summary.txt      -- Summary generation prompt
   quality_evaluation.txt        -- QA evaluation prompt (not used in production)
   image_scene.txt               -- Image generation style guide (scenes)
-  image_character.txt           -- Image generation style guide (characters)
+  image_character.txt           -- Image generation style guide (player characters)
+  image_npc_portrait.txt        -- Image generation style guide (NPC and enemy portraits)
   fallback_responses.json       -- Pre-written fallback responses
   game_state_schema.json        -- Game state JSON schema
   output_schemas/

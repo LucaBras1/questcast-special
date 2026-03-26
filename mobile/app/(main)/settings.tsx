@@ -18,6 +18,7 @@ import { Config } from '../../constants/config';
 import { Button } from '../../components/Button';
 import { useAuthStore } from '../../stores/authStore';
 import { apiClient } from '../../services/api';
+import { resetTutorialCompleted } from './tutorial';
 
 // Settings persistence keys
 const SETTINGS_KEY = 'questcast_settings';
@@ -195,6 +196,11 @@ export default function SettingsScreen() {
     updateSetting('autoSave', !settings.autoSave);
   };
 
+  const handleReplayTutorial = async () => {
+    await resetTutorialCompleted();
+    router.push('/(main)/tutorial');
+  };
+
   const handleLogout = () => {
     Alert.alert(
       'Log Out',
@@ -370,6 +376,27 @@ export default function SettingsScreen() {
                 </View>
               </View>
             </View>
+
+            <View style={styles.divider} />
+
+            <TouchableOpacity
+              onPress={handleReplayTutorial}
+              style={styles.settingRow}
+              accessibilityLabel="Replay tutorial"
+              accessibilityRole="button"
+              accessibilityHint="Double tap to replay the tutorial adventure"
+            >
+              <View style={styles.settingLabelContainer}>
+                <Text style={styles.settingIcon}>{'\uD83C\uDFAC'}</Text>
+                <View>
+                  <Text style={styles.settingLabel}>Replay Tutorial</Text>
+                  <Text style={styles.settingDescription}>
+                    Experience the guided intro again
+                  </Text>
+                </View>
+              </View>
+              <Text style={styles.chevron}>{'\u203A'}</Text>
+            </TouchableOpacity>
           </View>
         </View>
 

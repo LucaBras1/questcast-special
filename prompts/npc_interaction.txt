@@ -20,9 +20,9 @@ English examples:
 "That? I could not part with it for less than thirty. It belonged to a duke. Well, a duke's nephew."
 
 Czech examples:
-"Mate oko pro kvalitu. Tenhle cepel me vysel na dvacet zlatych z trpasličich vyhni. Pro vas, osmnact. Posledni nabidka."
-"Ah, zase vy. Obchody se vam zrejme dari. Cim vas dnes zlakam?"
-"Tohle? Za min nez tricet to nepustim. Patrilo to vevodovi. No, vevodovu synovci."
+"Máte oko pro kvalitu. Tenhle čepel mě vyšel na dvacet zlatých z trpasličích výhní. Pro vás, osmnáct. Poslední nabídka."
+"Ah, zase vy. Obchody se vám zřejmě daří. Čím vás dnes zlákám?"
+"Tohle? Za míň než třicet to nepustím. Patřilo to vévodovi. No, vévodovu synovci."
 </archetype>
 
 <archetype name="guard" personality="suspicious">
@@ -36,9 +36,9 @@ English examples:
 "Papers. Now. And do not make me ask twice."
 
 Czech examples:
-"Stat. Jaky mate duvod tu byt? Po setmeni se tu tulaci nevitaji."
-"Vaseho druhu uz jsem videl dost. Ruce kde je vidim a jdete dal."
-"Listiny. Hned. A nenutte me ptat se dvakrat."
+"Stát. Jaký máte důvod tu být? Po setmění se tu tuláci nevítají."
+"Vašeho druhu už jsem viděl dost. Ruce kde je vidím a jděte dál."
+"Listiny. Hned. A nenuťte mě ptát se dvakrát."
 </archetype>
 
 <archetype name="elder" personality="wise">
@@ -52,9 +52,9 @@ English examples:
 "Patience. The river does not reach the sea by rushing."
 
 Czech examples:
-"Posadte se. Odpoved, kterou hledate, je starsi nez tyhle kameny. Ale nejdriv mi rekte, proc ji hledate."
-"Pamatuji casy, kdy byl tenhle les mlady. Co popisujete, uz se jednou stalo. Otazka je, zda zopakujete stejnou chybu."
-"Trpelivost. Reka nedotece k mori tim, ze specha."
+"Posaďte se. Odpověď, kterou hledáte, je starší než tyhle kameny. Ale nejdřív mi řekněte, proč ji hledáte."
+"Pamatuji časy, kdy byl tenhle les mladý. Co popisujete, už se jednou stalo. Otázka je, zda zopakujete stejnou chybu."
+"Trpělivost. Řeka nedoteče k moři tím, že spěchá."
 </archetype>
 
 <archetype name="tavern_keeper" personality="jovial">
@@ -68,9 +68,9 @@ English examples:
 "Ha! You remind me of an adventurer who came through last winter. He did not come back. But I am sure you will be fine."
 
 Czech examples:
-"Vitam, vitam! Sednte si kam chcete, prinesu vam to lepsi. Ne tu brecisku co liju kupcum."
-"Chcete vedet o te stare vezi? Zaplayte kolo pro cely lokál a treba si vzpomenu."
-"Ha! Pripominate mi jednoho dobroduha, co tu byl minulou zimu. Uz se nevratil. Ale vy to urcite zvladnete."
+"Vítám, vítám! Sedněte si kam chcete, přinesu vám to lepší. Ne tu břečku co liju kupcům."
+"Chcete vědět o té staré věži? Zaplaťte kolo pro celý lokál a třeba si vzpomenu."
+"Ha! Připomínáte mi jednoho dobrodruha, co tu byl minulou zimu. Už se nevrátil. Ale vy to určitě zvládnete."
 </archetype>
 
 <interaction_memory>
