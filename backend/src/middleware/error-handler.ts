@@ -8,12 +8,13 @@ export function errorHandler(
   _request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  // Zod validation errors
-  if (error instanceof ZodError) {
-    const details = error.errors.map((e) => ({
+  // Zod validation errors (name check handles cross-module instanceof failures in test environments)
+  if (error instanceof ZodError || error.name === 'ZodError') {
+    const zodError = error as ZodError;
+    const details = zodError.errors?.map((e) => ({
       path: e.path.join('.'),
       message: e.message,
-    }));
+    })) ?? [{ path: '', message: error.message }];
     logger.warn('Validation error', { details });
     return reply.status(400).send({
       code: 'VALIDATION_ERROR',
